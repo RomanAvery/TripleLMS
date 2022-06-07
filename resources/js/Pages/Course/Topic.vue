@@ -29,6 +29,8 @@ import { Link } from '@inertiajs/inertia-vue3'
 
                     <h5p-activity v-if="activity.type == 'H5P'" :activity="activity" :user="user" />
 
+                    <make-code-activity v-if="activity.type == 'MAKECODE'" :activity="activity" :user="user" />
+
                     <text-activity v-if="activity.type == 'TEXT'" :activity="activity" :user="user"></text-activity>
 
                 </div>
@@ -51,6 +53,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
     import ExerciseActivity from "./Activities/Exercise"
     import H5pActivity from './Activities/H5p';
+    import MakeCodeActivity from './Activities/MakeCode';
     import TextActivity from './Activities/Text'
     import Comments from "./Comments";
 
@@ -58,6 +61,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         components: {
             H5pActivity,
             ExerciseActivity,
+            MakeCodeActivity,
             TextActivity,
             Comments,
         },
