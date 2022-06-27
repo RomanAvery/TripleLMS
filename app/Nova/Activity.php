@@ -27,6 +27,7 @@ use Alexwenzel\DependencyContainer\DependencyContainer;
 
 use PixelCreation\NovaFieldSortable\Concerns\SortsIndexEntries;
 use PixelCreation\NovaFieldSortable\Sortable;
+use SLASH2NL\NovaBackButton\NovaBackButton;
 
 class Activity extends Resource
 {
@@ -114,10 +115,6 @@ class Activity extends Resource
 
             Date::make('Created At', 'created_at')->onlyOnDetail(),
 
-            Date::make(__('Start Date'), 'start'),
-
-            Date::make(__('End Date'), 'end'),
-
             Boolean::make(__('Required'), 'required')
                 ->required()
                 ->default(true),
@@ -149,7 +146,6 @@ class Activity extends Resource
                 'App\Models\TypesActivities\Text' => 'Text',
                 'App\Models\TypesActivities\MakeCode' => 'MakeCode Project',
                 //Exercise::class,
-                //PDF::class,
             ])
                 ->displayUsingLabels()
                 ->required()
@@ -162,7 +158,6 @@ class Activity extends Resource
                 H5P::class,
                 MakeCode::class,
                 //Exercise::class,
-                //PDF::class,
             ])
                 ->exceptOnForms(),
 
@@ -198,7 +193,10 @@ class Activity extends Resource
      */
     public function cards(NovaRequest $request)
     {
-        return [];
+        return [
+            (new NovaBackButton())
+            ->onlyOnDetail(),
+        ];
     }
 
     /**

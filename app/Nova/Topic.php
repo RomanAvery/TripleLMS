@@ -18,6 +18,7 @@ use Lms\TeacherTopicComment\TeacherTopicComment;
 
 use PixelCreation\NovaFieldSortable\Concerns\SortsIndexEntries;
 use PixelCreation\NovaFieldSortable\Sortable;
+use SLASH2NL\NovaBackButton\NovaBackButton;
 
 class Topic extends Resource
 {
@@ -94,17 +95,9 @@ class Topic extends Resource
 
             HasMany::make(__('Activities'), 'Activities', Activity::class),
 
-            //HasMany::make(__('Weekly Plans'), 'weeklyPlannings', WeeklyPlanning::class),
-
             Sortable::make(__('Order'), 'order')
                 ->onlyOnIndex(),
-
-            DateTime::make(__('Start Date'), 'startDate')
-                ->withDateFormat('d-M-Y, H:i'),
-
-            DateTime::make(__('End Date'), 'endDate')
-                ->withDateFormat('d-M-Y, H:i'),
-
+                
             Boolean::make(__('Visible'), 'isShow')
                 ->hideWhenCreating()
                 ->hideWhenUpdating(),
@@ -141,7 +134,10 @@ class Topic extends Resource
      */
     public function cards(NovaRequest $request)
     {
-        return [];
+        return [
+            (new NovaBackButton())
+            ->onlyOnDetail(),
+        ];
     }
 
     /**

@@ -7,15 +7,9 @@ import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue';
         <JetResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
             Dashboard
         </JetResponsiveNavLink>
-        <template v-if="$page.props.user.group">
-            <JetResponsiveNavLink
-            :href="route('groupGradebook.gradebook', [$page.props.user.group.id, $page.props.user.id])"
-            :active="$page.props.currentRouteName == 'gradebook'"
-            >
-                Progress
-            </JetResponsiveNavLink>
-        </template>
     </div>
+
+    <slot name="sidebar"></slot>
 
     <!-- Responsive Settings Options -->
     <div class="pt-4 pb-1 border-t border-gray-200">
@@ -55,6 +49,12 @@ import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue';
 
 <script>
 export default {
-    emits: ['logout']
+    emits: ['logout'],
+    props: {
+        hasSidebar: {
+            type: Boolean,
+            default: false
+        }
+    },
 }
 </script>
