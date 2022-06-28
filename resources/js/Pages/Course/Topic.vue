@@ -5,9 +5,9 @@ import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-    <AppWithSidebarLayout 
-        :title="title" 
-        :topic="topic" 
+    <AppWithSidebarLayout
+        :title="title"
+        :topic="topic"
         :topics="topics"
         :activity="activity"
         :fullHeight="true"
@@ -37,10 +37,10 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 
                 <div class="flex justify-between">
-                    <Link class="btn btn-outline-info" :href="prev_url" v-if="prev_url">Prev</Link>
+                    <Link class="btn-outline-primary" :href="prev_url" v-if="prev_url">&lt; Prev</Link>
                     <div v-else></div>
-                    
-                    <Link class="btn btn-outline-info" :href="next_url" v-if="next_url">Next</Link>
+
+                    <Link class="btn-outline-primary" :href="next_url" v-if="next_url">Next &gt;</Link>
                     <div v-else></div>
                 </div>
             </div>
@@ -85,22 +85,12 @@ import { Link } from '@inertiajs/inertia-vue3'
         },
 
         created() {
-            /*if (this.activity) {
-                this.activity.activeClass = 'active-activity'
-            }*/
+            window.addEventListener('beforeunload', this.save_analytics);
         },
 
         mounted() {
             this.icons = sidebarIcons;
             this.getNav();
-
-            /*window.addEventListener('message', function receiveMessage(event) {
-                if (event.data.result === undefined) {
-                    return; // Only handle messages with result
-                }
-                
-                console.log(event.data.actor.name + ' just scored ' + (event.data.result.score.scaled * 100) + ' %');
-                } , false);*/
         },
 
         methods: {
@@ -108,9 +98,16 @@ import { Link } from '@inertiajs/inertia-vue3'
                 this.open = !this.open;
             },
 
+            save_analytics(evt) {
+                /*console.log(evt);
+                evt.returnValue = false;
+                alert('Test');
+                return false;*/
+            },
+
             getNav: function() {
                 if (!this.activity.id) return;
-                
+
                 axios.get(route('nav.topic.activity', this.activity.id)).then(response => {
                     console.log(response.data);
 
