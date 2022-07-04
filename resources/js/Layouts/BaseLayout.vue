@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 import { Head, Link } from '@inertiajs/inertia-vue3';
-import Notifications from '@/Layouts/Notifications';
+import Notifications from '@/Layouts/Notifications.vue';
 //import Alerts from '@/Components/Alerts.vue';
 import ResponsiveLinks from '@/Layouts/ResponsiveLinks.vue';
 import JetApplicationMark from '@/Jetstream/ApplicationMark.vue';
@@ -13,7 +13,10 @@ import JetNavLink from '@/Jetstream/NavLink.vue';
 import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue';
 
 defineProps({
-    title: String,
+    title: {
+        type: String,
+        default: 'App',
+    },
 });
 
 const showingNavigationDropdown = ref(false);
@@ -25,7 +28,7 @@ const logout = () => {
 
 <template>
     <div>
-        <Head :title="title" />
+        <Head :title="`${title} - ${$page.props.settings.title}`" />
 
         <JetBanner />
 

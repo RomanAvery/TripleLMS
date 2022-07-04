@@ -1,34 +1,29 @@
-require('./bootstrap');
+import './bootstrap';
+import '../css/app.css';
 
-import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/inertia-vue3';
+import 'moment';
+
+import { createApp, computed, h } from 'vue';
+import { createInertiaApp, usePage } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
-import { ZiggyVue } from 'ziggy';
-import { Ziggy } from './ziggy';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { ZiggyVue } from 'ziggy/vue.es.js';
 import VueScreen from 'vue-screen';
 
 import 'flowbite';
 
-//import '@coreui/coreui/dist/css/coreui.min.css';
-
-//import PortalVue from 'portal-vue';
-//import Notifications from 'vue-notification'
-
-//Vue.use(require('vue-moment'));
-//Vue.use(Notifications)
-//Vue.use(InertiaApp);
-//Vue.use(PortalVue);
-
 const app = document.getElementById('app');
+const site_title = usePage().props;
+console.log(site_title);
 
 createInertiaApp({
-    resolve: name => require(`./Pages/${name}`),
+    resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
     setup({ el, app, props, plugin }) {
         createApp({ render: () => h(app, props) })
             .use(plugin)
-            .use(ZiggyVue, Ziggy)
+            .use(ZiggyVue)
             .use(VueScreen, 'tailwind')
-            .mount(el)
+            .mount(el);
     },
 });
 
