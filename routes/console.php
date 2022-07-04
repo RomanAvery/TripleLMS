@@ -23,5 +23,5 @@ Artisan::command('deploy', function () {
     $this->call('cache:clear');
     $this->call('config:cache');
     $this->call('route:cache');
-    $this->call('view:cache');
+    $this->call('view:clear');
 })->purpose('Run commands ready for deploy');
