@@ -68,7 +68,7 @@
 
 <script>
     import { Inertia } from '@inertiajs/inertia';
-    import { useForm,usePage } from '@inertiajs/inertia-vue3';
+    import { useForm } from '@inertiajs/inertia-vue3';
 
     export default {
         props: {
@@ -97,9 +97,6 @@
                 this.form.post(route('access-code'))
             }
         },
-        mounted() {
-            console.log(usePage().props.value.flash);
-        }
     }
 </script>
 
