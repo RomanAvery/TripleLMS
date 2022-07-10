@@ -24,4 +24,6 @@ Artisan::command('deploy', function () {
     $this->call('config:cache');
     $this->call('route:cache');
     $this->call('view:clear');
+    $this->call('migrate --force');
+    $this->call('db:seed');
 })->purpose('Run commands ready for deploy');

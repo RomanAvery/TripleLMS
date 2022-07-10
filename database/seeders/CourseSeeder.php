@@ -21,6 +21,10 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
+        // Only create course if it doesn't exist
+        $course = Course::where('name', 'Internet of Things')->get()->first();
+        if ($course !== null) return;
+
         $course = Course::create([
             'name' => 'Internet of Things',
         ]);

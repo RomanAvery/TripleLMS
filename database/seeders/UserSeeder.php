@@ -14,13 +14,15 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('users')->insert([
-            'id' => 1,
+        // Only create one admin
+        $user = User::where('email', 'admin@demo.com')->get()->first();
+        if ($user !== null) return;
+
+        $user = User::create([
             'name' => 'Admin Demo',
             'email' => 'admin@demo.com',
             'password' => \Hash::make('demo'),
         ]);
-
-        User::find(1)->assignRole('admin');
+        $user->assignRole('admin');
     }
 }
