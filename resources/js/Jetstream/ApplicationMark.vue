@@ -11,7 +11,6 @@ export default {
         setup() {
             const url = computed(() => usePage().props.value.settings.logo);
             const title = computed(() => usePage().props.value.settings.title);
-            console.log(url);
             return { url, title }
         }
     }

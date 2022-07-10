@@ -13,8 +13,6 @@ import VueScreen from 'vue-screen';
 import 'flowbite';
 
 const app = document.getElementById('app');
-const site_title = usePage().props;
-console.log(site_title);
 
 createInertiaApp({
     resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),

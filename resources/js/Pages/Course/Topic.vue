@@ -109,8 +109,6 @@ import { Link } from '@inertiajs/inertia-vue3'
                 if (!this.activity.id) return;
 
                 axios.get(route('nav.topic.activity', this.activity.id)).then(response => {
-                    console.log(response.data);
-
                     if (response.data.prev != null) {
                         this.prev_url = route('courses.topic', [response.data.prev?.topic_id ?? this.topic.id, response.data.prev.id]);
                     }

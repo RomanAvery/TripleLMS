@@ -55,11 +55,11 @@
             <form @submit.prevent="submit_code" class="pb-6">
                 <label for="code">Access Code:</label>
                 <div class="grid grid-cols-1 sm:grid-cols-2">
-                    <div>
+                    <div class="p-2">
                         <input name="code" v-model="form.code" type="text" class="w-full focus:no-underline py-2 px-4 shadow rounded-lg" />
                     </div>
-                    <div class="content-center">
-                        <button type="submit" class="btn-outline-primary">Submit</button>
+                    <div class="p-2 content-center">
+                        <button type="submit" class="btn-outline-primary" :disabled="form.processing">Submit</button>
                     </div>
                 </div>
             </form>
@@ -67,12 +67,10 @@
 </template>
 
 <script>
+    import { Inertia } from '@inertiajs/inertia';
     import { useForm } from '@inertiajs/inertia-vue3';
 
     export default {
-        components: {
-        },
-
         props: {
             courses: Object,
         },
@@ -88,7 +86,7 @@
 
         computed: {
             filteredList () {
-                return this.courses.filter( course => {
+                return this.courses.filter(course => {
                     return course.name.includes(this.search)
                 })
             }
@@ -96,20 +94,9 @@
 
         methods: {
             submit_code () {
-                let res = axios.post(route('access-code'), this.form)
-                    .then(function (response) {
-                        console.log(response)
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                        if (error.response?.data?.msg !== null) {
-                            alert(error.response.data.msg);
-                        } else {
-                            alert('Something went wrong.');
-                        }
-                    });
+                this.form.post(route('access-code'))
             }
-        }
+        },
     }
 </script>
 

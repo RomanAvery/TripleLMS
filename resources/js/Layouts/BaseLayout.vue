@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import Notifications from '@/Layouts/Notifications.vue';
-//import Alerts from '@/Components/Alerts.vue';
+import Alerts from '@/Components/Alerts.vue';
 import ResponsiveLinks from '@/Layouts/ResponsiveLinks.vue';
 import JetApplicationMark from '@/Jetstream/ApplicationMark.vue';
 import JetBanner from '@/Jetstream/Banner.vue';
@@ -17,6 +17,10 @@ defineProps({
         type: String,
         default: 'App',
     },
+    fullHeight: {
+        type: Boolean,
+        default: false,
+    }
 });
 
 const showingNavigationDropdown = ref(false);
@@ -102,7 +106,7 @@ const logout = () => {
                 </div>
             </nav>
 
-
+            <Alerts />
 
             <!-- Page Content -->
             <main :class="{ 'hidden': (showingNavigationDropdown && !$grid.md), 'block': (!showingNavigationDropdown || $grid.md) }">
