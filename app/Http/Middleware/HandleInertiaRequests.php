@@ -41,11 +41,15 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             // Add site-wide settings
             'settings.title' => nova_get_setting('site_title') ?? config('app.name', 'TripleLMS'),
-            'test' => 'hi',
-
             'settings.logo' => ($site_logo !== null && file_exists(storage_path('app/public/' . $site_logo)))
                 ? \Illuminate\Support\Facades\URL::asset( 'storage/' . $site_logo)
                 : null,
+
+            'flash' => [
+                'success' => fn () => $request->session()->get('success'),
+                'info' => fn () => $request->session()->get('info'),
+                'error' => fn () => $request->session()->get('error'),
+            ]
         ]);
     }
 }

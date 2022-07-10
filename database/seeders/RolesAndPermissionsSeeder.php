@@ -43,13 +43,13 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'list courses']);
         Permission::create(['name' => 'show course']);
         Permission::create(['name' => 'create course']);
-        Permission::create(['name' => 'edit course']);
+        Permission::create(['name' => 'update course']);
         Permission::create(['name' => 'delete course']);
 
         Permission::create(['name' => 'list access codes']);
         Permission::create(['name' => 'show access code']);
         Permission::create(['name' => 'create access code']);
-        Permission::create(['name' => 'edit access code']);
+        Permission::create(['name' => 'update access code']);
         Permission::create(['name' => 'delete access code']);
 
         Permission::create(['name' => 'manage settings']);

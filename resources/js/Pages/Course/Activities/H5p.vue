@@ -41,17 +41,6 @@
             var iframeWin = iframe.contentWindow || iframe;
             var iframeDoc = iframe.contentDocument || iframeWin.document;
             window.frameDoc = iframeDoc;
-
-            /*$(iframeDoc).ready(function (event) {
-                iframeDoc.open();
-                iframeDoc.write(`\<script>
-                    console.log(this);
-                    H5P.externalDispatcher.on('xAPI', function (event) {
-                        window.parent.postMessage(event.data.statement, '*');
-                    });
-                \<\/script>`);
-                iframeDoc.close();
-            });*/
         },
     }
 </script>

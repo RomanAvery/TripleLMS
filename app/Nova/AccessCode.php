@@ -47,7 +47,10 @@ class AccessCode extends Resource
             ID::make()->sortable(),
 
             Text::make('Code')
-                ->rules('required', 'max:100', 'unique:access_codes'),
+                ->creationRules('required', 'max:100', 'unique:access_codes')
+                ->readonly(function ($request) {
+                    return $request->isUpdateOrUpdateAttachedRequest();
+                }),
 
             BelongsTo::make('Course')
                 ->rules('required'),
