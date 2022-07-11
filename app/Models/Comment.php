@@ -25,7 +25,6 @@ class Comment extends Model
 
     const TYPE = [
         'activity' => Activity::class,
-        'weeklyPlanning' => WeeklyPlanning::class
     ];
 
     public function user()

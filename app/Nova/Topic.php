@@ -4,7 +4,6 @@ namespace App\Nova;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-use App\Nova\Actions\TopicGradebook;
 use Eminiarts\Tabs\Tabs;
 use Eminiarts\Tabs\Tab;
 use Laravel\Nova\Fields\BelongsTo;
@@ -14,7 +13,6 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Lms\TeacherTopicComment\TeacherTopicComment;
 
 use PixelCreation\NovaFieldSortable\Concerns\SortsIndexEntries;
 use PixelCreation\NovaFieldSortable\Sortable;
@@ -90,8 +88,6 @@ class Topic extends Resource
 
             BelongsTo::make(__('Course'), 'Course', Course::class),
 
-            TeacherTopicComment::make(),
-
             HasMany::make(__('Activities'), 'Activities', Activity::class),
 
             Sortable::make(__('Order'), 'order')
@@ -149,9 +145,7 @@ class Topic extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [
-            new TopicGradebook
-        ];
+        return [];
     }
 
     /**

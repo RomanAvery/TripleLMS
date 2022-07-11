@@ -31,10 +31,6 @@
         "laravel/sanctum": "^2.6",
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.0",
-        "lms/activity-scores": "*",
-        "lms/course-gradebook": "*",
-        "lms/gradebook": "*",
-        "lms/teacher-topic-comment": "*",
         "maatwebsite/excel": "^3.1.40",
         "monaye/simple-link-button": "^1.0",
         "outl1ne/nova-settings": "^5.0",
@@ -57,26 +53,6 @@
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
-        },
-        {
-            "type": "path",
-            "url": "./nova-components/ActivityComments"
-        },
-        {
-            "type": "path",
-            "url": "./nova-components/ActivityScores"
-        },
-        {
-            "type": "path",
-            "url": "./nova-components/CourseGradebook"
-        },
-        {
-            "type": "path",
-            "url": "./nova-components/Gradebook"
-        },
-        {
-            "type": "path",
-            "url": "./nova-components/TeacherTopicComment"
         }
     ],
     "require-dev": {

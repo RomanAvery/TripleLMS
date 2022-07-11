@@ -14,13 +14,9 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-use \App\Http\Controllers\Dashboard,
-    \App\Http\Controllers\AccessCodeController,
-    \App\Http\Controllers\CoursesController,
-    \App\Http\Controllers\Student\ExerciseController;
-
-use \App\Http\Controllers\CourseGradebookController;
-
+use \App\Http\Controllers\AccessCodeController;
+use \App\Http\Controllers\CourseController;
+use \App\Http\Controllers\CommentController;
 use App\Http\Controllers\Auth\SocialiteController;
 
 Route::get('/auth/google', [SocialiteController::class, 'redirectToGoogle'])->name('google.login');
@@ -47,27 +43,25 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function() {
-    Route::get('/dashboard', Dashboard::class)
+    Route::get('/dashboard', [CourseController::class, 'index'])
         ->name('dashboard');
 
-    //Route::get('/gradebook', \App\Http\Controllers\StudentGradebook::class);
+    Route::get('/courses/{id}', [CourseController::class, 'show'])
+        ->name('courses.show');
 
-    Route::get('/courses/{id}', [CoursesController::class, 'index'])
-        ->name('courses.index');
-
-    Route::get('/courses/topic/{id}/{activity_id?}', [CoursesController::class, 'topic'])
+    Route::get('/courses/topic/{id}/{activity_id?}', [CourseController::class, 'topic'])
         ->name('courses.topic');
 
     // System Comments
-    Route::get('/comments/activity/{id}/{type}', [\App\Http\Controllers\CommentController::class, 'list'])
+    Route::get('/comments/activity/{id}/{type}', [CommentController::class, 'list'])
         ->name('comments.activity');
-    Route::get('/comments/answers/{id}', [\App\Http\Controllers\CommentController::class, 'answers'])
+    Route::get('/comments/answers/{id}', [CommentController::class, 'answers'])
         ->name('comments.answers');
 
-    Route::post('/comments/activity/{type}', [\App\Http\Controllers\CommentController::class, 'store']);
-    Route::post('/comments/storeAnswer/{type}', [\App\Http\Controllers\CommentController::class, 'storeAnswer']);
+    Route::post('/comments/activity/{type}', [CommentController::class, 'store']);
+    Route::post('/comments/storeAnswer/{type}', [CommentController::class, 'storeAnswer']);
 
-    Route::post('/comments/delete', [\App\Http\Controllers\CommentController::class, 'delete']);
+    Route::post('/comments/delete', [CommentController::class, 'delete']);
 
     // Get previous and next navigation for the activity, if it applies
     Route::get('/nav/topic/activity/{id}', function ($id) {

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Bundles\Notifications\Aplication\CommentNotificator;
+use App\Bundles\Notifications\Application\CommentNotificator;
 use App\Bundles\Notifications\Domain\Notification;
 use App\Models\Activity;
 use App\Models\Comment;
