@@ -1,7 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import SidebarItems from '@/Layouts/SidebarItems.vue';
-import { CButton, CAccordion, CAccordionItem, CAccordionHeader, CAccordionBody } from '@coreui/vue'
 import { Link } from '@inertiajs/inertia-vue3'
 </script>
 

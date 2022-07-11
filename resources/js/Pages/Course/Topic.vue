@@ -1,6 +1,5 @@
 <script setup>
 import AppWithSidebarLayout from '@/Layouts/AppWithSidebarLayout.vue';
-import { CButton } from '@coreui/vue'
 import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
