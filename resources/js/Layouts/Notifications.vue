@@ -1,3 +1,7 @@
+<script setup>
+    import { Link } from '@inertiajs/inertia-vue3';
+</script>
+
 <template>
     <div class="flex relative">
         <button class="flex text-sm border-2 border-transparent pt-1 my-4" @click="toggleShowNotification()">
@@ -6,21 +10,23 @@
             </svg>
         </button>
 
-        <div class="w-screen absolute z-50 mt-2 rounded-md shadow-lg origin-top-right mt-12" v-if="isShow">
+        <div class="w-screen absolute z-50 rounded-md shadow-lg origin-top-right my-12" v-if="isShow">
             <div class="shadow-lg border-gray-900 bg-white mt-2 rounded-lg" style="width: 600px">
                 <div class="flex justify-between bg-gray-200 py-2 px-2">
                     <div>
                         <h1 class="text-lg font-bold">Notifications</h1>
                     </div>
                     <div>
-                        <button class="text-md font-bold">
+                        <button @click="clearNotifications" class="text-md font-bold">
                             Mark all as read
                         </button>
                     </div>
                 </div>
-                <div v-for="notification in notifications" class="mx-4 mt-2">
-                    <h2 class="text-lg text-blue-500 font-bold">{{ notification.data.title }}</h2>
-                    <div class="border-t border-gray-100"></div>
+                <div :key="notification.id" v-for="notification in notifications" class="mx-4 mt-2">
+                    <Link :href="route('courses.topic', [notification.data.topic_id, notification.data.activity_id])">
+                        <h2 class="text-lg text-blue-500 font-bold">{{ notification.data.info }}</h2>
+                    </Link>
+                    <div class="border-t border-gray-100" />
                 </div>
             </div>
         </div>
@@ -37,9 +43,9 @@
         },
 
         mounted() {
-            axios.get('/notifications').then(response => {
+            axios.get(route('notifications.list')).then(response => {
                 this.notifications = response.data
-            })
+            });
         },
 
         methods: {
@@ -49,6 +55,11 @@
                 }
 
                 this.isShow = true
+            },
+
+            clearNotifications() {
+                axios.delete(route('notifications.delete'));
+                this.notifications = {};
             }
         }
     }

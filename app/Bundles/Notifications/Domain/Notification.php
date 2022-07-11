@@ -7,19 +7,16 @@ namespace App\Bundles\Notifications\Domain;
 class Notification
 {
     private $title;
-
     private $details;
+    private $topic_id;
+    private $activity_id;
 
-    private $resource_id;
-
-    private $resource_name;
-
-    public function __construct($title, $details, $recource_id, $resource_name)
+    public function __construct($title, $details, $topic_id, $activity_id)
     {
         $this->title = $title;
         $this->details = $details;
-        $this->resource_id = $recource_id;
-        $this->resource_name = $resource_name;
+        $this->topic_id = $topic_id;
+        $this->activity_id = $activity_id;
     }
 
     public function toPrimitives(): array
@@ -27,8 +24,8 @@ class Notification
         return [
             'title' => $this->title,
             'details' => $this->details,
-            'resourceId' => $this->resource_id,
-            'resourceName' => $this->resource_name
+            'topic_id' => $this->topic_id,
+            'activity_id' => $this->activity_id,
         ];
     }
 
@@ -40,5 +37,15 @@ class Notification
     public function details(): string
     {
         return $this->details;
+    }
+
+    public function topic_id(): string
+    {
+        return $this->topic_id;
+    }
+
+    public function activity_id(): string
+    {
+        return $this->activity_id;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Bundles\Notifications\Aplication;
+namespace App\Bundles\Notifications\Application;
 
 
 use App\Notifications\NewComment;

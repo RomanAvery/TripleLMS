@@ -53,24 +53,34 @@ Route::middleware([
         ->name('courses.topic');
 
     // System Comments
-    Route::get('/comments/activity/{id}/{type}', [CommentController::class, 'list'])
-        ->name('comments.activity');
-    Route::get('/comments/answers/{id}', [CommentController::class, 'answers'])
-        ->name('comments.answers');
+    Route::get('/comments/activity/{activity_id}', [CommentController::class, 'list'])
+        ->name('comments.list');
 
-    Route::post('/comments/activity/{type}', [CommentController::class, 'store']);
-    Route::post('/comments/storeAnswer/{type}', [CommentController::class, 'storeAnswer']);
+    Route::get('/comments/activity/{activity_id}/{parent_id}/replies', [CommentController::class, 'replies'])
+        ->name('comments.replies');
 
-    Route::post('/comments/delete', [CommentController::class, 'delete']);
+    Route::post('/comments/activity/{activity_id}', [CommentController::class, 'store'])
+        ->name('comments.store');
+
+    Route::post('/comments/activity/{activity_id}/{parent_id}/reply', [CommentController::class, 'storeReply'])
+        ->name('comments.storeReply');
+
+    Route::delete('/comments/delete/{comment_id}', [CommentController::class, 'delete'])
+        ->name('comments.delete');
 
     // Get previous and next navigation for the activity, if it applies
     Route::get('/nav/topic/activity/{id}', function ($id) {
         return \App\Models\Activity::find($id)?->prev_next_ids;
     })->name('nav.topic.activity');
 
-    Route::post('/access-code', [AccessCodeController::class, 'addToCourse'])->name('access-code');
-});
+    Route::post('/access-code', [AccessCodeController::class, 'addToCourse'])
+        ->name('access-code');
 
-Route::get('/notifications', function () {
-    return auth()->user()->notifications;
+    Route::get('/notifications', function () {
+        return auth()->user()->notifications;
+    })->name('notifications.list');
+    
+    Route::delete('/notifications', function () {
+        return auth()->user()->notifications->each->delete();
+    })->name('notifications.delete');
 });

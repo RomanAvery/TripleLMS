@@ -67,6 +67,8 @@ class NewComment extends Notification
         return [
             'info' => $this->details['title'],
             'subtitle' => $this->details['details'],
+            'topic_id' => $this->details['topic_id'],
+            'activity_id' => $this->details['activity_id'],
             'type' => 'info'
         ];
     }
@@ -79,8 +81,7 @@ class NewComment extends Notification
     public function toNova($notifiable)
     {
         return (new NovaNotification)
-            ->message($this->details['title'] . ' - ' . $this->details['details'])
-            //->action('Download', URL::remote('https://example.com/report.pdf'))
+            ->message($this->details['title'])
             ->icon('download')
             ->type('info');
     }

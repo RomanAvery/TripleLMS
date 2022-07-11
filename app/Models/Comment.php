@@ -14,17 +14,15 @@ class Comment extends Model
 
     protected $with = ['user'];
 
+    protected $appends = ['totalReplies'];
+
     /**
      * The attributes that should be cast.
      *
      * @var array
      */
     protected $casts = [
-        'created_at' => 'datetime:d-m-y h:m',
-    ];
-
-    const TYPE = [
-        'activity' => Activity::class,
+        'created_at' => 'datetime:h:m d-m-y',
     ];
 
     public function user()
@@ -37,7 +35,7 @@ class Comment extends Model
         return $this->hasMany(Comment::class, 'parent_id');
     }
 
-    public function getTotalAnswersAttribute()
+    public function getTotalRepliesAttribute()
     {
         return Comment::where('parent_id', $this->id)->get()->count();
     }

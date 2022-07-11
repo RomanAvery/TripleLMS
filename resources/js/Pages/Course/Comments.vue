@@ -7,29 +7,29 @@
             </h1>
         </div>
 
-        <div class="card mb-6 py-4 px-6" v-if="!showAnswers">
+        <div class="card mb-6 py-4 px-6" v-if="!showReplies">
             <div>
                 <button 
+                    class="btn-outline-primary"
                     v-if="!addNew"
-                    @click="addNew = true">Add New Comment</button>
-                <button 
+                    @click="addNew = true">+ Add New Comment</button>
+                <button
+                    class="btn-outline-danger" 
                     v-else
-                    @click="addNew = false">Hide New Comment</button>
+                    @click="addNew = false">- Hide Comment Form</button>
             </div>
             <div class="text-center shadow-md rounded-lg mb-4 p-4" v-if="addNew">
                 <vue-editor v-model="comment" :editor-toolbar="customToolbar"  />
 
                 <button
-                    class="my-4 btn-default btn-primary"
+                    class="my-4 btn-outline-success"
                     v-if="comment != null  && comment != '' "
                     @click="saveComment()"
-                >Comment</button>
+                >Add Comment</button>
             </div>
 
-            <div v-for="comment in comments" class="mb-4 p-4 shadow-md rounded-lg">
-                <div
-                    class="flex items-center"
-                >
+            <div :key="comment.id" v-for="comment in comments" class="mb-4 p-4 shadow-md rounded-lg">
+                <div class="flex items-center">
                     <div class="flex-shrink">
                         <img :src="comment.user.profile_photo_url" alt="" class="w-12 rounded-full">
                     </div>
@@ -57,7 +57,7 @@
                                     </div>
 
                                     <div class="flex-1 ml-2  text-blue-600">
-                                        Replies
+                                        Replies ({{ comment.totalReplies ?? 0 }})
                                     </div>
                                 </div>
                             </button>
@@ -124,7 +124,7 @@
 
             </div>
 
-            <div v-for="comment in answers" class="mb-4 p-4  shadow-md rounded-lg bg-white border">
+            <div :key="comment.id" v-for="comment in replies" class="mb-4 p-4  shadow-md rounded-lg bg-white border">
                 <div
                     class="flex items-center"
                 >
@@ -160,13 +160,13 @@
 
             <div class="text-center shadow-md rounded-lg  mb-4 p-4 bg-white">
                 <h2 class="text-90 text-sm mb-4 text-left">Respond:</h2>
-                <vue-editor v-model="answer" :editor-toolbar="customToolbar"  />
+                <vue-editor v-model="reply" :editor-toolbar="customToolbar"  />
 
                 <button
-                    class="my-4 btn-default btn-primary"
-                    v-if="answer != null  && answer != '' "
-                    @click="saveAnswer()"
-                >Respond</button>
+                    class="my-4 btn-outline-success"
+                    v-if="reply != null  && reply != ''"
+                    @click="saveReply()"
+                >Save Reply</button>
             </div>
         </div>
 
@@ -190,13 +190,12 @@
                 addNew: false,
                 comment: null,
                 comments: Object,
-                showAnswers: false,
-                answer: null,
-                answers: Object,
+                showReplies: false,
+                reply: null,
+                replies: Object,
                 customToolbar: [
                     ['font' ,"bold", "italic", "underline"],
                     [{ list: "ordered" }, { list: "bullet" }],
-                    ["image"]
                 ]
             }
         },
@@ -206,12 +205,12 @@
         },
 
         mounted() {
-            this.getComment()
+            this.getComments()
         },
 
         methods: {
-            getComment: function () {
-                axios.get(route('comments.activity', [this.activity.id, 'activity'])).then(response => {
+            getComments: function () {
+                axios.get(route('comments.list', [this.activity.id])).then(response => {
                     this.comments = response.data
                 })
             },
@@ -220,53 +219,51 @@
                 let data = {
                     'activityId': this.activity.id,
                     'comment': this.comment,
-                    'resourceId': this.activity.id,
-                    'resourceName': 'activities',
-                }
+                };
 
-                axios.post(`/comments/activity/activity`, data).then(response => {
+                axios.post(route('comments.store', [this.activity.id]), data).then(response => {
                     this.comments.unshift(response.data)
-                })
+                });
 
-                this.comment = ''
+                this.addNew = false;
+                this.comment = '';
             },
 
             deleteComment: function (comment) {
                 this.comments = this.comments.filter(item => item.id != comment.id)
-
-                axios.post(`/comments/delete`, {'commentId': comment.id})
+                axios.delete(route('comments.delete', [comment.id]));
             },
 
             showComment: function (comment) {
                 this.comment = comment
-                this.showAnswers = true
-                this.getAnswers()
+                this.showReplies = true
+                this.getReplies()
             },
 
             returnToComments: function () {
                 this.comment = null
-                this.showAnswers = false
-                this.answers = Object
+                this.showReplies = false
+                this.replies = Object
             },
 
-            getAnswers: function () {
-                axios.get(`/comments/answers/${this.comment.id}/`).then(response => {
-                    this.answers = response.data
+            getReplies: function () {
+                axios.get(route('comments.replies', [this.activity.id, this.comment.id])).then(response => {
+                    this.replies = response.data
                 })
             },
 
-            saveAnswer: function () {
+            saveReply: function () {
                 let data = {
                     'activityId': this.activity.id,
-                    'comment': this.answer,
+                    'comment': this.reply,
                     'parent_id': this.comment.id
                 }
 
-                axios.post(`/comments/storeAnswer/activity`, data).then(response => {
-                    this.answers.push(response.data)
+                axios.post(route('comments.storeReply', [this.activity.id, this.comment.id]), data).then(response => {
+                    this.replies.push(response.data)
                 })
 
-                this.answer = ''
+                this.reply = ''
             },
 
         }
