@@ -22,9 +22,6 @@ use App\Nova\Text as TextActivity;
 use Alexwenzel\DependencyContainer\HasDependencies;
 use Alexwenzel\DependencyContainer\DependencyContainer;
 
-//use Lms\ActivityComments\ActivityComments;
-//use Lms\ActivityScores\ActivityScores;
-
 use PixelCreation\NovaFieldSortable\Concerns\SortsIndexEntries;
 use PixelCreation\NovaFieldSortable\Sortable;
 
@@ -129,10 +126,8 @@ class Activity extends Resource
             Sortable::make(__("Order"), 'order')
                 ->onlyOnIndex(),
 
-            Number::make(__("Order"), 'order')
-                 ->hideWhenCreating(),
-
-            Heading::make('Content'),
+            Heading::make('Content')
+                ->hideWhenUpdating(),
 
             Select::make(__("Activity Type"), 'activityable_type')->options([
                 'App\Models\TypesActivities\H5P' => 'H5P Content',
@@ -168,8 +163,6 @@ class Activity extends Resource
                 ->dependsOn('activityable_type', 'App\Models\TypesActivities\MakeCode')
                 ->onlyOnForms()
                 ->hideWhenUpdating(),
-
-            Heading::make('Meta'),
         ];
     }
 

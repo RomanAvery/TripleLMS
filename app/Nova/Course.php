@@ -46,7 +46,7 @@ class Course extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'code'
+        'id', 'name'
     ];
 
 
@@ -102,8 +102,6 @@ class Course extends Resource
                 ->rules('required', 'max:255'),
 
             Trix::make(__('Description'), 'description'),
-
-            Text::make(__('Code'), 'code')->sortable(),
 
             Image::make(__('Cover'), 'cover'),
 

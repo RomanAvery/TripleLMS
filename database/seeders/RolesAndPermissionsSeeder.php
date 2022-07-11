@@ -18,46 +18,46 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Create student permissions
-        Permission::create(['name' => 'list only my courses']);
-        Permission::create(['name' => 'show only my course']);
-        Permission::create(['name' => 'show only my user']);
-        Permission::create(['name' => 'update only my user']);
+        Permission::updateOrCreate(['name' => 'list only my courses']);
+        Permission::updateOrCreate(['name' => 'show only my course']);
+        Permission::updateOrCreate(['name' => 'show only my user']);
+        Permission::updateOrCreate(['name' => 'update only my user']);
 
-        $student = Role::create(['name' => 'student']);
+        $student = Role::updateOrCreate(['name' => 'student']);
         $student->givePermissionTo(Permission::all());
 
         // Create teacher permissions
-        Permission::create(['name' => 'update only my course']);
-        Permission::create(['name' => 'list only my users']);
+        Permission::updateOrCreate(['name' => 'update only my course']);
+        Permission::updateOrCreate(['name' => 'list only my users']);
 
-        $teacher = Role::create(['name' => 'teacher']);
+        $teacher = Role::updateOrCreate(['name' => 'teacher']);
         $teacher->givePermissionTo(Permission::all());
 
         // Create admin permissions
-        Permission::create(['name' => 'list users']);
-        Permission::create(['name' => 'show user']);
-        Permission::create(['name' => 'create user']);
-        Permission::create(['name' => 'update user']);
-        Permission::create(['name' => 'delete user']);
+        Permission::updateOrCreate(['name' => 'list users']);
+        Permission::updateOrCreate(['name' => 'show user']);
+        Permission::updateOrCreate(['name' => 'create user']);
+        Permission::updateOrCreate(['name' => 'update user']);
+        Permission::updateOrCreate(['name' => 'delete user']);
 
-        Permission::create(['name' => 'list courses']);
-        Permission::create(['name' => 'show course']);
-        Permission::create(['name' => 'create course']);
-        Permission::create(['name' => 'update course']);
-        Permission::create(['name' => 'delete course']);
+        Permission::updateOrCreate(['name' => 'list courses']);
+        Permission::updateOrCreate(['name' => 'show course']);
+        Permission::updateOrCreate(['name' => 'create course']);
+        Permission::updateOrCreate(['name' => 'update course']);
+        Permission::updateOrCreate(['name' => 'delete course']);
 
-        Permission::create(['name' => 'list access codes']);
-        Permission::create(['name' => 'show access code']);
-        Permission::create(['name' => 'create access code']);
-        Permission::create(['name' => 'update access code']);
-        Permission::create(['name' => 'delete access code']);
+        Permission::updateOrCreate(['name' => 'list access codes']);
+        Permission::updateOrCreate(['name' => 'show access code']);
+        Permission::updateOrCreate(['name' => 'create access code']);
+        Permission::updateOrCreate(['name' => 'update access code']);
+        Permission::updateOrCreate(['name' => 'delete access code']);
 
-        Permission::create(['name' => 'manage settings']);
-        Permission::create(['name' => 'manage roles']);
-        Permission::create(['name' => 'manage translations']);
-        Permission::create(['name' => 'manage backup']);
+        Permission::updateOrCreate(['name' => 'manage settings']);
+        Permission::updateOrCreate(['name' => 'manage roles']);
+        Permission::updateOrCreate(['name' => 'manage translations']);
+        Permission::updateOrCreate(['name' => 'manage backup']);
 
-        $admin = Role::create(['name' => 'admin']);
+        $admin = Role::updateOrCreate(['name' => 'admin']);
         $admin->givePermissionTo(Permission::all());
     }
 }

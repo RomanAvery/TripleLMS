@@ -14,14 +14,12 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
-
 Artisan::command('deploy', function () {
     $this->call('storage:link');
     $this->call('cache:clear');
     $this->call('config:cache');
     $this->call('route:cache');
     $this->call('view:clear');
+    $this->call('migrate', ['--force' => true]);
+    $this->call('db:seed');
 })->purpose('Run commands ready for deploy');

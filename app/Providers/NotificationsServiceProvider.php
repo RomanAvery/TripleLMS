@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Bundles\Notifications\Aplication\CommentNotificator;
+use App\Bundles\Notifications\Application\CommentNotificator;
 use Illuminate\Support\ServiceProvider;
 
 class NotificationsServiceProvider extends ServiceProvider

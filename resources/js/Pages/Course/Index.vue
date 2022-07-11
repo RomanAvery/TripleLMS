@@ -1,6 +1,5 @@
 <script setup>
     import { Link } from "@inertiajs/inertia-vue3";
-    import CourseGradebook from '../Admin/CourseGradebook.vue';
 </script>
 
 <template>

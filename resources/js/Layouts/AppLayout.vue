@@ -25,15 +25,13 @@ defineProps({
     },
 });
 
-const showingNavigationDropdown = ref(false);
-
 const logout = () => {
     Inertia.post(route('logout'));
 };
 </script>
 
 <template>
-    <BaseLayout :title="title">
+    <BaseLayout :title="title" :fullHeight="fullHeight">
         <template #links-left>
             <JetNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                 Dashboard

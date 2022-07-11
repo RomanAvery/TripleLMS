@@ -149,7 +149,7 @@ class Activity extends Model implements Sortable
 
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable')
+        return $this->hasMany(Comment::class)
             ->whereNull('parent_id')
             ->orderBy('id', 'DESC');
     }

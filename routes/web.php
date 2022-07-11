@@ -14,13 +14,9 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-use \App\Http\Controllers\Dashboard,
-    \App\Http\Controllers\AccessCodeController,
-    \App\Http\Controllers\CoursesController,
-    \App\Http\Controllers\Student\ExerciseController;
-
-use \App\Http\Controllers\CourseGradebookController;
-
+use \App\Http\Controllers\AccessCodeController;
+use \App\Http\Controllers\CourseController;
+use \App\Http\Controllers\CommentController;
 use App\Http\Controllers\Auth\SocialiteController;
 
 Route::get('/auth/google', [SocialiteController::class, 'redirectToGoogle'])->name('google.login');
@@ -47,36 +43,44 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function() {
-    Route::get('/dashboard', Dashboard::class)
+    Route::get('/dashboard', [CourseController::class, 'index'])
         ->name('dashboard');
 
-    //Route::get('/gradebook', \App\Http\Controllers\StudentGradebook::class);
+    Route::get('/courses/{id}', [CourseController::class, 'show'])
+        ->name('courses.show');
 
-    Route::get('/courses/{id}', [CoursesController::class, 'index'])
-        ->name('courses.index');
-
-    Route::get('/courses/topic/{id}/{activity_id?}', [CoursesController::class, 'topic'])
+    Route::get('/courses/topic/{id}/{activity_id?}', [CourseController::class, 'topic'])
         ->name('courses.topic');
 
     // System Comments
-    Route::get('/comments/activity/{id}/{type}', [\App\Http\Controllers\CommentController::class, 'list'])
-        ->name('comments.activity');
-    Route::get('/comments/answers/{id}', [\App\Http\Controllers\CommentController::class, 'answers'])
-        ->name('comments.answers');
+    Route::get('/comments/activity/{activity_id}', [CommentController::class, 'list'])
+        ->name('comments.list');
 
-    Route::post('/comments/activity/{type}', [\App\Http\Controllers\CommentController::class, 'store']);
-    Route::post('/comments/storeAnswer/{type}', [\App\Http\Controllers\CommentController::class, 'storeAnswer']);
+    Route::get('/comments/activity/{activity_id}/{parent_id}/replies', [CommentController::class, 'replies'])
+        ->name('comments.replies');
 
-    Route::post('/comments/delete', [\App\Http\Controllers\CommentController::class, 'delete']);
+    Route::post('/comments/activity/{activity_id}', [CommentController::class, 'store'])
+        ->name('comments.store');
+
+    Route::post('/comments/activity/{activity_id}/{parent_id}/reply', [CommentController::class, 'storeReply'])
+        ->name('comments.storeReply');
+
+    Route::delete('/comments/delete/{comment_id}', [CommentController::class, 'delete'])
+        ->name('comments.delete');
 
     // Get previous and next navigation for the activity, if it applies
     Route::get('/nav/topic/activity/{id}', function ($id) {
         return \App\Models\Activity::find($id)?->prev_next_ids;
     })->name('nav.topic.activity');
 
-    Route::post('/access-code', [AccessCodeController::class, 'addToCourse'])->name('access-code');
-});
+    Route::post('/access-code', [AccessCodeController::class, 'addToCourse'])
+        ->name('access-code');
 
-Route::get('/notifications', function () {
-    return auth()->user()->notifications;
+    Route::get('/notifications', function () {
+        return auth()->user()->notifications;
+    })->name('notifications.list');
+    
+    Route::delete('/notifications', function () {
+        return auth()->user()->notifications->each->delete();
+    })->name('notifications.delete');
 });
