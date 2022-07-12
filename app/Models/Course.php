@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\AccessCode;
+use App\Models\Qualtrics\MailingList;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,8 +26,14 @@ class Course extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function access_codes() {
+    public function access_codes()
+    {
         return $this->hasMany(AccessCode::class);
+    }
+
+    public function qualtrics_mailing_list()
+    {
+        return $this->hasOne(MailingList::class, 'course_id');
     }
 
     public function topics()

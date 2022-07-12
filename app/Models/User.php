@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Models\Course;
 use App\Models\TSChannel;
 
+use App\Models\Qualtrics\Contact;
+
 use Laravel\Nova\Actions\Actionable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -80,6 +82,7 @@ class User extends Authenticatable
         'password',
         'social_id',
         'social_type',
+        'contact_id',
     ];
 
     /**
@@ -112,6 +115,11 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
 
     public function courses()
     {

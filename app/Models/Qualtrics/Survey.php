@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Qualtrics;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class QualtricsSurvey extends Model
+class Survey extends Model
 {
     use HasFactory;
+
+    protected $table = 'qualtrics_surveys';
 
     protected $fillable = [
         'survey_id',  // ID of the survey
