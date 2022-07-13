@@ -4,8 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-use App\Models\Course;
-
 return new class extends Migration
 {
     /**
@@ -15,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('qualtrics_mailing_lists', function (Blueprint $table) {
-            $table->id();
-            $table->text('name');
-            $table->text('list_id');
-            $table->foreignIdFor(Course::class);
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('survey_opt_in')->default(false);
         });
     }
 
@@ -31,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('qualtrics_mailing_lists');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('survey_opt_in');
+        });
     }
 };

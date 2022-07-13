@@ -92,7 +92,8 @@ class User extends Resource
             Actions\RemoveFromCourse::make(),
             Actions\AssignThingspeakChannel::make(),
             Actions\DetachThingspeakChannel::make(),
-            Actions\AssignQualtricsSurveys::make(),
+            Actions\SurveyOptIn::make(),
+            Actions\SurveyOptOut::make(),
         ];
     }
 }

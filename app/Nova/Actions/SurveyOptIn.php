@@ -14,7 +14,7 @@ use App\Helpers\GuzzleQualtrics;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ClientException;
 
-class AssignQualtricsSurveys extends Action
+class SurveyOptIn extends Action
 {
     use InteractsWithQueue, Queueable;
 
@@ -27,7 +27,10 @@ class AssignQualtricsSurveys extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        $this->make_list();
+        foreach ($models as $model) {
+            $model->survey_opt_in = true;
+            $model->save();
+        }
     }
 
     /**
@@ -39,18 +42,5 @@ class AssignQualtricsSurveys extends Action
     public function fields(NovaRequest $request)
     {
         return [];
-    }
-
-    private function make_list()
-    {
-        $client = GuzzleQualtrics::client();
-
-        try {
-            $res = $client->get(env('QUALTRICS_API_BASE') . "API/v3/directories/" . env('QUALTRICS_DIRECTORY_ID') . "/mailinglists");
-            //dd(json_decode($res->getBody(), true));
-            Action::message('hi');
-        } catch (ClientException $e) {
-            Action::danger('Something went wrong!');
-        }
     }
 }

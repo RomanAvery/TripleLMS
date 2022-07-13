@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('courses', function (Blueprint $table) {
-            $table->foreignId('mailing_list_id')->nullable();
+        Schema::create('qualtrics', function (Blueprint $table) {
+            $table->id();
+            $table->string('link');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('courses', function (Blueprint $table) {
-            $table->dropColumn('mailing_list_id');
-        });
+        Schema::dropIfExists('qualtrics');
     }
 };
