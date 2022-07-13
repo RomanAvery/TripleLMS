@@ -24,5 +24,5 @@ Artisan::command('deploy', function () {
 
 Artisan::command('run', function () {
     $this->call('migrate', ['--force' => true]);
-    $this->call('db:seed');
+    $this->call('db:seed', ['--force' => true]);
 })->purpose('Run commands ready for production run');
