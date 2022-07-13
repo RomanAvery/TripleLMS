@@ -4,8 +4,10 @@ namespace App\Models;
 
 use App\Models\TypesActivities\Exercise;
 use App\Models\TypesActivities\H5P;
+use App\Models\TypesActivities\Qualtrics;
 use App\Models\TypesActivities\MakeCode;
 use App\Models\TypesActivities\Text;
+
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -52,6 +54,7 @@ class Activity extends Model implements Sortable
         Exercise::class,
         Text::class,
         H5P::class,
+        Qualtrics::class,
         MakeCode::class,
     ];
 
@@ -73,6 +76,15 @@ class Activity extends Model implements Sortable
                     $model->activityable_type = H5P::class;
                     $model->activityable_id = $h5p->id;
                     unset($model->link);  # Unset the link so we don't get an error
+                    break;
+
+                case 'App\Models\TypesActivities\Qualtrics':
+                    $qualtric = Qualtrics::create([
+                        'link' => $model->link,
+                    ]);
+                    $model->activityable_type = Qualtrics::class;
+                    $model->activityable_id = $qualtric->id;
+                    unset($model->link);
                     break;
 
                 case 'App\Models\TypesActivities\Text':

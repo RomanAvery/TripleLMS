@@ -37,6 +37,7 @@
         "phoenix-lib/nova-nested-tree-attach-many": "^1.7",
         "pixelcreation/nova-field-sortable": "^3.0.0",
         "pusher/pusher-php-server": "^6.1",
+        "qbnk/guzzle-oauth2-plugin": "^4.0",
         "sentry/sentry-laravel": "^2.12",
         "socialiteproviders/google": "^4.1",
         "socialiteproviders/microsoft": "^4.1",

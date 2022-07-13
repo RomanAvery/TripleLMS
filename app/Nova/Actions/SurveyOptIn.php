@@ -10,7 +10,11 @@ use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class AssignQualtricsSurveys extends Action
+use App\Helpers\GuzzleQualtrics;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\ClientException;
+
+class SurveyOptIn extends Action
 {
     use InteractsWithQueue, Queueable;
 
@@ -23,7 +27,10 @@ class AssignQualtricsSurveys extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        //
+        foreach ($models as $model) {
+            $model->survey_opt_in = true;
+            $model->save();
+        }
     }
 
     /**

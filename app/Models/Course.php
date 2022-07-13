@@ -25,7 +25,8 @@ class Course extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function access_codes() {
+    public function access_codes()
+    {
         return $this->hasMany(AccessCode::class);
     }
 

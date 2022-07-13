@@ -28,6 +28,8 @@ import { Link } from '@inertiajs/inertia-vue3'
 
                     <h5p-activity v-if="activity.type == 'H5P'" :activity="activity" :user="user" />
 
+                    <qualtrics-activity v-if="activity.type == 'QUALTRICS'" :activity="activity" :user="user" />
+
                     <make-code-activity v-if="activity.type == 'MAKECODE'" :activity="activity" :user="user" />
 
                     <text-activity v-if="activity.type == 'TEXT'" :activity="activity" :user="user"></text-activity>
@@ -52,6 +54,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
     import ExerciseActivity from "./Activities/Exercise.vue";
     import H5pActivity from './Activities/H5p.vue';
+    import QualtricsActivity from './Activities/Qualtrics.vue';
     import MakeCodeActivity from './Activities/MakeCode.vue';
     import TextActivity from './Activities/Text.vue';
     import Comments from "./Comments.vue";
@@ -59,6 +62,7 @@ import { Link } from '@inertiajs/inertia-vue3'
     export default {
         components: {
             H5pActivity,
+            QualtricsActivity,
             ExerciseActivity,
             MakeCodeActivity,
             TextActivity,

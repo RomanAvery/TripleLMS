@@ -131,6 +131,7 @@ class Activity extends Resource
 
             Select::make(__("Activity Type"), 'activityable_type')->options([
                 'App\Models\TypesActivities\H5P' => 'H5P Content',
+                'App\Models\TypesActivities\Qualtrics' => 'Qualtrics Survey',
                 'App\Models\TypesActivities\Text' => 'Text',
                 'App\Models\TypesActivities\MakeCode' => 'MakeCode Project',
                 //Exercise::class,
@@ -151,6 +152,11 @@ class Activity extends Resource
 
             DependencyContainer::make((new H5P(null))->fields($request))
                 ->dependsOn('activityable_type', 'App\Models\TypesActivities\H5P')
+                ->onlyOnForms()
+                ->hideWhenUpdating(),
+
+            DependencyContainer::make((new Qualtrics(null))->fields($request))
+                ->dependsOn('activityable_type', 'App\Models\TypesActivities\Qualtrics')
                 ->onlyOnForms()
                 ->hideWhenUpdating(),
 

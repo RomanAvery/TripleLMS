@@ -60,6 +60,7 @@
         "link-preview-node": "^1.0.4",
         "moment": "^2.29.3",
         "pluralize": "^8.0.0",
+        "pym.js": "^1.3.2",
         "timeme.js": "^2.1.0",
         "vue-cal": "^4.2.0",
         "vue-file-agent": "^1.7.3",

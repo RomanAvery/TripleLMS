@@ -11,6 +11,7 @@ use App\Models\Activity;
 use App\Models\User;
 
 use App\Models\TypesActivities\H5P;
+use App\Models\TypesActivities\Qualtrics;
 
 class CourseSeeder extends Seeder
 {
@@ -33,6 +34,12 @@ class CourseSeeder extends Seeder
             [
                 'name' => 'Lesson 1: Course details',
                 'activities' => [
+                    [
+                        'name' => 'Pre-Course Survey',
+                        'content' => Qualtrics::make([
+                            'link' => 'https://vuw.qualtrics.com/jfe/form/SV_8BUUZv8jyD8papo',
+                        ]),
+                    ],
                     [
                         'name' => 'Course Overview',
                         'content' => H5P::make([

@@ -7,7 +7,7 @@ use Laravel\Nova\Actions\DestructiveAction;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class DetachQualtricsSurveys extends DestructiveAction
+class SurveyOptOut extends DestructiveAction
 {
     /**
      * Perform the action on the given models.
@@ -18,7 +18,10 @@ class DetachQualtricsSurveys extends DestructiveAction
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        //
+        foreach ($models as $model) {
+            $model->survey_opt_in = false;
+            $model->save();
+        }
     }
 
     /**

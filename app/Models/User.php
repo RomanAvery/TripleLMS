@@ -80,6 +80,8 @@ class User extends Authenticatable
         'password',
         'social_id',
         'social_type',
+        'contact_id',
+        'survey_opt_in',
     ];
 
     /**
@@ -101,7 +103,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'is_solvent' => 'boolean'
+        'survey_opt_in' => 'boolean',
     ];
 
     /**

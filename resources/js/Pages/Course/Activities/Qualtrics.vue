@@ -9,13 +9,13 @@
         </div>
 
         <div class="my-4">
-            <iframe
-                id="h5p-content"
-                class="m-auto w-full"
-                type="text/html"
-                    :src="activity.activityable.link"
-                    frameborder="0">
-            </iframe>
+            <div v-if="user.survey_opt_in" id="qualtrics-content"></div>
+                
+            <div v-else class="mx-4">
+                <p>You haven't opted in to these surveys.</p>
+                <p>If you'd like to, please ask your teacher.</p>
+                <p>Otherwise, you can continue.</p>
+            </div>
         </div>
 
         <comments :activity="activity" :user="user"></comments>
@@ -24,6 +24,7 @@
 
 <script>
     import $ from 'jquery';
+    import pym from 'pym.js';
     import Comments from "../Comments.vue";
 
     export default {
@@ -34,6 +35,12 @@
         props: {
             activity: Object,
             user: Object,
+        },
+
+        mounted() {
+            if (this.user.survey_opt_in) {
+                new pym.Parent('qualtrics-content', `${this.activity.activityable.link}?name=${this.user.name}&email=${this.user.email}`);
+            }
         },
     }
 </script>
