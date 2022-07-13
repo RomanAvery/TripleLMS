@@ -20,6 +20,9 @@ Artisan::command('deploy', function () {
     $this->call('config:cache');
     $this->call('route:cache');
     $this->call('view:clear');
+})->purpose('Run commands ready for deploy');
+
+Artisan::command('run', function () {
     $this->call('migrate', ['--force' => true]);
     $this->call('db:seed');
-})->purpose('Run commands ready for deploy');
+})->purpose('Run commands ready for production run');
