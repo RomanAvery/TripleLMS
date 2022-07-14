@@ -9,7 +9,9 @@
         </div>
 
         <div class="my-4">
-            <div v-if="user.survey_opt_in" id="qualtrics-content"></div>
+            <div v-if="user.survey_opt_in" id="qualtrics-content">
+                <iframe :src="`${this.activity.activityable.link}?name=${this.user.name}&email=${this.user.email}`"></iframe>
+            </div>
                 
             <div v-else class="mx-4">
                 <p>You haven't opted in to these surveys.</p>
@@ -39,12 +41,15 @@
 
         mounted() {
             if (this.user.survey_opt_in) {
-                new pym.Parent('qualtrics-content', `${this.activity.activityable.link}?name=${this.user.name}&email=${this.user.email}`);
+                //new pym.Parent('qualtrics-content', `${this.activity.activityable.link}?name=${this.user.name}&email=${this.user.email}`);
             }
         },
     }
 </script>
 
 <style scoped>
-
+    #qualtrics-content iframe {
+        width: 100%;
+        height: 950px;
+    }
 </style>

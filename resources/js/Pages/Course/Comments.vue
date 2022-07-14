@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="activity.allow_comments">
         <hr />
         <div class="py-2">
             <h1 class="text-90 font-normal text-2xl mb-3">

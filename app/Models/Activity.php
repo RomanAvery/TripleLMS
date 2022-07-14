@@ -32,7 +32,7 @@ class Activity extends Model implements Sortable
         'divider',
         'course',
         'isActiveToDo',
-        'completed'
+        'completed',
     ];
 
     protected $attributes = [
@@ -48,6 +48,7 @@ class Activity extends Model implements Sortable
     protected $casts = [
         'start' => 'date:d-m-Y',
         'end' => 'date:d-m-Y',
+        'allow_comments' => 'boolean',
     ];
 
     protected $types = [

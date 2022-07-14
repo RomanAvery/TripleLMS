@@ -118,6 +118,10 @@ class Activity extends Resource
             Boolean::make(__('Show'), 'isShow')
                 ->required(),
 
+            Boolean::make(__('Allow Comments'), 'allow_comments')
+                ->required()
+                ->default(true),
+
             \Laravel\Nova\Fields\Number::make(__('Score'), 'score')
                 ->min(0)
                 ->max(100)

@@ -44,13 +44,12 @@ class SocialiteController extends Controller
             }
       
             if ($finduser) {
-      
                 Auth::login($finduser);
      
                 return redirect()->route('dashboard');
       
             } else {
-                $newUser = User::create([
+                $newUser = User::updateOrCreate([
                     'name' => $user->name,
                     'email' => $user->email,
                     'social_id'=> $user->id,
