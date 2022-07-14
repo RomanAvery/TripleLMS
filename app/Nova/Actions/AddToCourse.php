@@ -35,7 +35,13 @@ class AddToCourse extends Action
         }
 
         foreach ($models as $model) {
-            $course->users()->attach($model->id);
+            $user = $course->users()->where('id', $model->id)->first();
+
+            if ($user === null) {
+                // User isn't attached, so add them
+                $course->users()->attach($model->id);
+            }
+            
         }
 
         return Action::message('Attached users to course');
