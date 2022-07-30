@@ -34,6 +34,15 @@ class CourseController extends Controller
             ->with('topics')
             ->first();
 
+        if ($course === null) abort(404);
+
+        $user = auth()?->user();
+        activity()
+            ->performedOn($course)
+            ->causedBy(auth()?->user())
+            ->withProperties([ 'type' => 'view course index' ])
+            ->log("User '{$user->name}' viewed course '{$course->name}'.");
+
         return Inertia::render('Course/Index')
             ->with(compact('course'));
     }
@@ -54,6 +63,13 @@ class CourseController extends Controller
         }
 
         if ($activity === null) abort(404);
+
+        $user = auth()?->user();
+        activity()
+            ->performedOn($activity)
+            ->causedBy(auth()?->user())
+            ->withProperties([ 'type' => 'view activity' ])
+            ->log("User '{$user->name}' viewed activity '{$activity->name}' on topic '{$topic->name}'.");
 
         $topic->course;
         $topics = $topic->course->topics;
