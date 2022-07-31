@@ -31,6 +31,7 @@
         "laravel/sanctum": "^2.6",
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.0",
+        "league/flysystem-aws-s3-v3": "^3.2",
         "maatwebsite/excel": "^3.1.40",
         "monaye/simple-link-button": "^1.0",
         "murdercode/nova4-tinymce-editor": "^0.0.5",
