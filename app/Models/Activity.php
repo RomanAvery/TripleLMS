@@ -59,6 +59,50 @@ class Activity extends Model implements Sortable
         MakeCode::class,
     ];
 
+    protected static function updateActivityType($model) {
+        switch ($model->activityable_type) {
+            case 'App\Models\TypesActivities\H5P':
+                $h5p = H5P::create([
+                    'link' => $model->link,
+                ]);
+                $model->activityable_type = H5P::class;
+                $model->activityable_id = $h5p->id;
+                unset($model->link);  # Unset the link so we don't get an error
+                break;
+
+            case 'App\Models\TypesActivities\Qualtrics':
+                $qualtric = Qualtrics::create([
+                    'link' => $model->link,
+                ]);
+                $model->activityable_type = Qualtrics::class;
+                $model->activityable_id = $qualtric->id;
+                unset($model->link);
+                break;
+
+            case 'App\Models\TypesActivities\Text':
+                $text = Text::create([
+                    'link' => $model->body,
+                ]);
+                $model->activityable_type = Text::class;
+                $model->activityable_id = $text->id;
+                unset($model->body);  # Unset the link so we don't get an error
+                break;
+
+            case 'App\Models\TypesActivities\MakeCode':
+                $text = MakeCode::create([
+                    'link' => $model->link,
+                ]);
+                $model->activityable_type = MakeCode::class;
+                $model->activityable_id = $text->id;
+                unset($model->link);  # Unset the link so we don't get an error
+                break;
+
+            default:
+                unset($model->activityable_type);
+                break;
+        }
+    }
+
     /**
      * The "booted" method of the model.
      *
@@ -69,51 +113,11 @@ class Activity extends Model implements Sortable
         parent::boot();
 
         static::creating(function ($model) {
-            switch ($model->activityable_type) {
-                case 'App\Models\TypesActivities\H5P':
-                    $h5p = H5P::create([
-                        'link' => $model->link,
-                    ]);
-                    $model->activityable_type = H5P::class;
-                    $model->activityable_id = $h5p->id;
-                    unset($model->link);  # Unset the link so we don't get an error
-                    break;
-
-                case 'App\Models\TypesActivities\Qualtrics':
-                    $qualtric = Qualtrics::create([
-                        'link' => $model->link,
-                    ]);
-                    $model->activityable_type = Qualtrics::class;
-                    $model->activityable_id = $qualtric->id;
-                    unset($model->link);
-                    break;
-
-                case 'App\Models\TypesActivities\Text':
-                    $text = Text::create([
-                        'link' => $model->body,
-                    ]);
-                    $model->activityable_type = Text::class;
-                    $model->activityable_id = $text->id;
-                    unset($model->body);  # Unset the link so we don't get an error
-                    break;
-
-                case 'App\Models\TypesActivities\MakeCode':
-                    $text = MakeCode::create([
-                        'link' => $model->link,
-                    ]);
-                    $model->activityable_type = MakeCode::class;
-                    $model->activityable_id = $text->id;
-                    unset($model->link);  # Unset the link so we don't get an error
-                    break;
-
-                default:
-                    unset($model->activityable_type);
-                    break;
-            }
-
+            static::updateActivityType($model);
         });
 
         static::updating(function ($model) {
+            static::updateActivityType($model);
         });
     }
 

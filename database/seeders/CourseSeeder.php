@@ -22,11 +22,15 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
+        $course_exists = false;
+
         // Only create course if it doesn't exist
         $course = Course::where('name', 'Internet of Things')->get()->first();
-        if ($course !== null) return;
+        if ($course !== null) {
+            $course_exists = true;
+        };
 
-        $course = Course::create([
+        $course = Course::updateOrCreate([
             'name' => 'Internet of Things',
         ]);
 
@@ -107,22 +111,65 @@ class CourseSeeder extends Seeder
                 ]
             ],
             [
-                'name' => 'Lesson 5: Intro to Microbit',
+                'name' => 'Lesson 5: Industry Professionals',
                 'activities' => []
             ],
             [
-                'name' => 'Lesson 6: Intro to IoT Shield',
-                'activities' => []
+                'name' => 'Lesson 6a: Intro to Microbit',
+                'activities' => [
+                    [
+                        'name' => 'Introduction to Microbit',
+                        'content' => H5P::make([
+                            'link' => 'https://vuwcourses.h5p.com/content/1291624581395377299',
+                        ]),
+                    ],
+                    [
+                        'name' => 'Identify the Microbit components',
+                        'content' => H5P::make([
+                            'link' => 'https://vuwcourses.h5p.com/content/1291624587023276019',
+                        ]),
+                    ],
+                    [
+                        'name' => 'Setup and Programming first steps',
+                        'content' => H5P::make([
+                            'link' => 'https://vuwcourses.h5p.com/content/1291624615318067299',
+                        ]),
+                    ],
+                ]
+            ],
+            [
+                'name' => 'Lesson 6b: Intro to IoT Shield',
+                'activities' => [
+                    [
+                        'name' => 'Introduction to the Environment Science Expansion Board',
+                        'content' => H5P::make([
+                            'link' => 'https://vuwcourses.h5p.com/content/1291679998537313599',
+                        ]),
+                    ],
+                ]
             ],
             [
                 'name' => 'Lesson 7: Project',
-                'activities' => []
+                'activities' => [
+                    [
+                        'name' => 'Individual Projects',
+                        'content' => H5P::make([
+                            'link' => 'https://vuwcourses.h5p.com/content/1291702301106059759',
+                        ]),
+                    ],
+                    [
+                        'name' => 'My Personal Project',
+                        'content' => H5P::make([
+                            'link' => 'https://vuwcourses.h5p.com/content/1291702303280850009',
+                        ]),
+                    ],
+                ]
             ],
         ];
 
         foreach ($topics as $topic) {
             // Make topic
-            $t = Topic::create([
+            $t = Topic::updateOrCreate([
                 'name' => $topic['name'],
                 'course_id' => $course->id,
             ]);
@@ -133,12 +180,21 @@ class CourseSeeder extends Seeder
             foreach ($topic['activities'] as $activity) {
                 $c = $activity['content'];
 
-                $a = Activity::create([
-                    'name' => $activity['name'],
-                    'topic_id' => $t->id,
-                    'link' => $c->link,
-                    'activityable_type' => get_class($c)
-                ]);
+                // Try to find activity
+                $a = Activity::where('name', $activity['name'])
+                    ->where('topic_id', $t->id)
+                    ->get()->first();
+
+                if ($a === null) {
+                    $a = Activity::make([
+                        'name' => $activity['name'],
+                        'topic_id' => $t->id,
+                    ]);
+                }
+                
+                $a->activityable_type = get_class($c);
+                $a->link = $c->link;
+                $a->save();
 
                 // Save activity to topics
                 $t->activities()->save($a);
@@ -146,6 +202,8 @@ class CourseSeeder extends Seeder
         }
 
         // Add every user to this course.
-        $course->users()->saveMany(User::all());
+        if (!$course_exists) {
+            $course->users()->saveMany(User::all());
+        }
     }
 }

@@ -5,7 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\Trix;
+use Murdercode\TinymceEditor\TinymceEditor;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Text extends Resource
@@ -69,7 +69,7 @@ class Text extends Resource
     public function fields(Request $request)
     {
         return [
-            Trix::make(__('Text'), 'body')
+            TinymceEditor::make(__('Text'), 'body')
                 ->required()
                 ->rules('required'),
         ];
