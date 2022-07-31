@@ -117,7 +117,9 @@ class Activity extends Model implements Sortable
         });
 
         static::updating(function ($model) {
-            static::updateActivityType($model);
+            if ($model->link !== null || $model->body !== null) {
+                static::updateActivityType($model);
+            }
         });
     }
 

@@ -52,7 +52,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         ], [], 'Homepage');
 
         \Outl1ne\NovaSettings\NovaSettings::addSettingsFields([
-            Text::make('TinyMCE API Key', 'tinymce_api_key'),
+            
         ], [], 'Global Settings');
     }
 
