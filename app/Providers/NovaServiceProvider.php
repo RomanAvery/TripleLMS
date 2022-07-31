@@ -10,6 +10,9 @@ use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\TextArea;
+use Laravel\Nova\Fields\Trix;
+use Murdercode\TinymceEditor\TinymceEditor;
+use Laravel\Nova\Panel;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use Lms\CourseGradebook\CourseGradebook;
@@ -36,9 +39,21 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         \Outl1ne\NovaSettings\NovaSettings::addSettingsFields([
             Text::make('Site Title', 'site_title'),
             Image::make('Logo', 'logo_frontend'),
+            
+        ]);
+
+        \Outl1ne\NovaSettings\NovaSettings::addSettingsFields([
             TextArea::make('Slideshow Images', 'slideshow_images')
                 ->help('Enter multiple URLs seperated by a comma.'),
-        ]);
+            TinymceEditor::make('Featured Column 1', 'featured_column_1'),
+            TinymceEditor::make('Featured Column 2', 'featured_column_2'),
+            TinymceEditor::make('Featured Column 3', 'featured_column_3'),
+            TinymceEditor::make('Main Content', 'main_content'),
+        ], [], 'Homepage');
+
+        \Outl1ne\NovaSettings\NovaSettings::addSettingsFields([
+            Text::make('TinyMCE API Key', 'tinymce_api_key'),
+        ], [], 'Global Settings');
     }
 
     /**

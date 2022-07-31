@@ -17,7 +17,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\Trix;
+use Murdercode\TinymceEditor\TinymceEditor;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 use Spatie\Tags\Tag;
@@ -100,8 +100,8 @@ class Course extends Resource
                 ->sortable()
                 ->required()
                 ->rules('required', 'max:255'),
-
-            Trix::make(__('Description'), 'description'),
+            
+            TinymceEditor::make(__('Description'), 'description'),
 
             Image::make(__('Cover'), 'cover'),
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "64d2ccf0deccfea7086220184d1d928a",
+    "content-hash": "ebfaefa5ef1aa0372dde90a532ab0cef",
     "packages": [
         {
             "name": "alexwenzel/nova-dependency-container",
@@ -4470,6 +4470,51 @@
                 }
             ],
             "time": "2022-06-09T08:59:12+00:00"
+        },
+        {
+            "name": "murdercode/nova4-tinymce-editor",
+            "version": "v0.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/murdercode/Nova4-TinymceEditor.git",
+                "reference": "09743b41bdd8b158674e926d6c97075496c6ad72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/murdercode/Nova4-TinymceEditor/zipball/09743b41bdd8b158674e926d6c97075496c6ad72",
+                "reference": "09743b41bdd8b158674e926d6c97075496c6ad72",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Murdercode\\TinymceEditor\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Murdercode\\TinymceEditor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova field.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/murdercode/Nova4-TinymceEditor/issues",
+                "source": "https://github.com/murdercode/Nova4-TinymceEditor/tree/v0.0.5"
+            },
+            "time": "2022-07-29T19:26:58+00:00"
         },
         {
             "name": "myclabs/php-enum",

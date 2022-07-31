@@ -20,19 +20,13 @@
         </div>
 
         <div class="p-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="rounded bg-gray-300 p-4">
-                    <h1 class="text-lg text-center font-bold">Getting started</h1>
-                </div>
-                <div class="rounded bg-gray-300 p-4">
-                    <h1 class="text-lg text-center font-bold">Who are we?</h1>
-                </div>
-                <div class="rounded bg-gray-300 p-4">
-                    <h1 class="text-lg text-center font-bold">Contact us</h1>
-                    <p>Email: pravin.vaz@vuw.ac.nz</p>
-                    <p>Ph: +64 4 463 6765</p>
-                </div>
+            <div v-if="content && content.columns" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <template :key="index" v-for="(column, index) in content.columns">
+                    <div class="rounded bg-gray-300 p-4" v-html="column" />
+                </template>
             </div>
+            
+            <div class="py-6" v-html="content.main" />
         </div>
     </GuestLayout>
 </template>
@@ -40,6 +34,7 @@
 <script>
     export default {
         props: {
+            content: Array,
             images: Array,
         },
     }

@@ -33,6 +33,7 @@
         "laravel/tinker": "^2.0",
         "maatwebsite/excel": "^3.1.40",
         "monaye/simple-link-button": "^1.0",
+        "murdercode/nova4-tinymce-editor": "^0.0.5",
         "norman-huth/nova-values-field": "^1.0",
         "outl1ne/nova-settings": "^5.0",
         "phoenix-lib/nova-nested-tree-attach-many": "^1.7",

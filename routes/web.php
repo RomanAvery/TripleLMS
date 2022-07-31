@@ -25,6 +25,15 @@ Route::get('/auth/microsoft', [SocialiteController::class, 'redirectToMicrosoft'
 Route::get('/callback/microsoft', [SocialiteController::class, 'handleMicrosoftCallback'])->name('microsoft.callback');
 
 Route::get('/', function () {
+    $content = [
+        'columns' => [
+            nova_get_setting('featured_column_1'),
+            nova_get_setting('featured_column_2'),
+            nova_get_setting('featured_column_3'),
+        ],
+        'main' => nova_get_setting('main_content'),
+    ];
+
     $images = explode(",", nova_get_setting('slideshow_images')) ?? null;
     
     if ($images === null) {
@@ -36,7 +45,7 @@ Route::get('/', function () {
         ];
     }
     return Inertia::render('Index')
-        ->with(compact('images'));
+        ->with(compact('images', 'content'));
 })->name('index');
 
 Route::get('/logo', function () {
