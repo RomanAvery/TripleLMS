@@ -25,7 +25,18 @@ Route::get('/auth/microsoft', [SocialiteController::class, 'redirectToMicrosoft'
 Route::get('/callback/microsoft', [SocialiteController::class, 'handleMicrosoftCallback'])->name('microsoft.callback');
 
 Route::get('/', function () {
-    return Inertia::render('Index');
+    $images = explode(",", nova_get_setting('slideshow_images')) ?? null;
+    
+    if ($images === null) {
+        // Set default images
+        $images = [
+            'https://images.pexels.com/photos/1476321/pexels-photo-1476321.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+            'https://images.pexels.com/photos/221185/pexels-photo-221185.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+            'https://images.pexels.com/photos/177598/pexels-photo-177598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        ];
+    }
+    return Inertia::render('Index')
+        ->with(compact('images'));
 })->name('index');
 
 Route::get('/logo', function () {

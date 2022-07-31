@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\TextArea;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use Lms\CourseGradebook\CourseGradebook;
@@ -35,6 +36,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         \Outl1ne\NovaSettings\NovaSettings::addSettingsFields([
             Text::make('Site Title', 'site_title'),
             Image::make('Logo', 'logo_frontend'),
+            TextArea::make('Slideshow Images', 'slideshow_images')
+                ->help('Enter multiple URLs seperated by a comma.'),
         ]);
     }
 

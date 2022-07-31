@@ -5,7 +5,7 @@
 
 <template>
     <GuestLayout title="Home">
-        <div>
+        <div v-if="images && images.length !== 0">
             <Carousel :autoplay="4000" :wrap-around="true">
                 <Slide v-for="slide in images" :key="slide">
                     <div class="carousel__item">
@@ -39,15 +39,8 @@
 
 <script>
     export default {
-        data: () => {
-            return {
-                // Set slider images here
-                images: [
-                    'https://images.pexels.com/photos/1476321/pexels-photo-1476321.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-                    'https://images.pexels.com/photos/221185/pexels-photo-221185.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-                    'https://images.pexels.com/photos/177598/pexels-photo-177598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-                ]
-            }
+        props: {
+            images: Array,
         },
     }
 </script>
