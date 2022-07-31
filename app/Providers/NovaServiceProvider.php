@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\TextArea;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Trix;
 use Murdercode\TinymceEditor\TinymceEditor;
 use Laravel\Nova\Panel;
@@ -43,7 +43,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         ]);
 
         \Outl1ne\NovaSettings\NovaSettings::addSettingsFields([
-            TextArea::make('Slideshow Images', 'slideshow_images')
+            Textarea::make('Slideshow Images', 'slideshow_images')
                 ->help('Enter multiple URLs seperated by a comma.'),
             TinymceEditor::make('Featured Column 1', 'featured_column_1'),
             TinymceEditor::make('Featured Column 2', 'featured_column_2'),
