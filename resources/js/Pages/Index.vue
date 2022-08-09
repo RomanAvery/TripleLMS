@@ -25,8 +25,8 @@
                     <div class="rounded bg-gray-300 p-4" v-html="column" />
                 </template>
             </div>
-            
-            <div class="py-6" v-html="content.main" />
+
+            <div class="py-6" v-html="content?.main" />
         </div>
     </GuestLayout>
 </template>
