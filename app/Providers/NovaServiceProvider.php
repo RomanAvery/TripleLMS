@@ -39,7 +39,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         \Outl1ne\NovaSettings\NovaSettings::addSettingsFields([
             Text::make('Site Title', 'site_title'),
             Image::make('Logo', 'logo_frontend'),
-            
+            Text::make('Google Analytics Tag', 'ga_tag'),
         ]);
 
         \Outl1ne\NovaSettings\NovaSettings::addSettingsFields([

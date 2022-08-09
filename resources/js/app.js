@@ -8,6 +8,7 @@ import { createInertiaApp, usePage } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from 'ziggy/vue.es.js';
+import VueGtag from "vue-gtag";
 import VueScreen from 'vue-screen';
 
 import 'flowbite';
@@ -20,6 +21,12 @@ createInertiaApp({
         createApp({ render: () => h(app, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(VueGtag, { 
+                config: { id: props?.initialPage?.props?.settings?.ga },
+                params: {
+                    user_id: props?.initialPage?.props?.user?.id
+                }
+            })
             .use(VueScreen, 'tailwind')
             .mount(el);
     },

@@ -2,6 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
+
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -41,9 +44,10 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             // Add site-wide settings
             'settings.title' => nova_get_setting('site_title') ?? config('app.name', 'TripleLMS'),
-            'settings.logo' => ($site_logo !== null && file_exists(storage_path('app/public/' . $site_logo)))
-                ? \Illuminate\Support\Facades\URL::asset( 'storage/' . $site_logo)
+            'settings.logo' => ($site_logo !== null && Storage::exists($site_logo))
+                ? Storage::url($site_logo)
                 : null,
+            'settings.ga' => nova_get_setting('ga_tag') ?? null,
 
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),
