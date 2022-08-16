@@ -138,6 +138,7 @@ class Activity extends Resource
                 'App\Models\TypesActivities\Qualtrics' => 'Qualtrics Survey',
                 'App\Models\TypesActivities\Text' => 'Text',
                 'App\Models\TypesActivities\MakeCode' => 'MakeCode Project',
+                'App\Models\TypesActivities\VideoGrid' => 'Video Grid',
                 //Exercise::class,
             ])
                 ->displayUsingLabels()
@@ -149,7 +150,9 @@ class Activity extends Resource
             MorphTo::make(__("Activity Type"), 'Activityable')->types([
                 \App\Nova\Text::class,
                 H5P::class,
+                Qualtrics::class,
                 MakeCode::class,
+                VideoGrid::class,
                 //Exercise::class,
             ])
                 ->exceptOnForms(),
@@ -171,6 +174,11 @@ class Activity extends Resource
 
             DependencyContainer::make((new MakeCode(null))->fields($request))
                 ->dependsOn('activityable_type', 'App\Models\TypesActivities\MakeCode')
+                ->onlyOnForms()
+                ->hideWhenUpdating(),
+
+            DependencyContainer::make((new VideoGrid(null))->fields($request))
+                ->dependsOn('activityable_type', 'App\Models\TypesActivities\VideoGrid')
                 ->onlyOnForms()
                 ->hideWhenUpdating(),
         ];

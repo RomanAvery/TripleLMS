@@ -33,6 +33,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
                     <text-activity v-if="activity.type == 'TEXT'" :activity="activity" :user="user"></text-activity>
 
+                    <video-grid-activity v-if="activity.type = 'VIDEO_GRID'" :activity="activity" :user="user" />
                 </div>
 
 
@@ -56,6 +57,7 @@ import { Link } from '@inertiajs/inertia-vue3'
     import QualtricsActivity from './Activities/Qualtrics.vue';
     import MakeCodeActivity from './Activities/MakeCode.vue';
     import TextActivity from './Activities/Text.vue';
+    import VideoGridActivity from './Activities/VideoGrid.vue';
     import Comments from "./Comments.vue";
 
     export default {
@@ -65,6 +67,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             ExerciseActivity,
             MakeCodeActivity,
             TextActivity,
+            VideoGridActivity,
             Comments,
         },
 

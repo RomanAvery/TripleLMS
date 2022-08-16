@@ -12,6 +12,7 @@ use App\Models\User;
 
 use App\Models\TypesActivities\H5P;
 use App\Models\TypesActivities\Qualtrics;
+use App\Models\TypesActivities\VideoGrid;
 
 class CourseSeeder extends Seeder
 {
@@ -102,17 +103,24 @@ class CourseSeeder extends Seeder
             [
                 'name' => 'Lesson 4: How it works',
                 'activities' => [
-                    /*[
-                        'name' => '',
+                    [
+                        'name' => 'Basic Layers of IoT',
                         'content' => H5P::make([
-                            'link' => '',
+                            'link' => 'https://vuwcourses.h5p.com/content/1291719619676183199',
                         ]),
-                    ],*/
+                    ],
                 ]
             ],
             [
                 'name' => 'Lesson 5: Industry Professionals',
-                'activities' => []
+                'activities' => [
+                    [
+                        'name' => 'Interviews from Spark',
+                        'content' => H5P::make([
+                            'link' => 'https://vuwcourses.h5p.com/content/1291720497644177699',
+                        ]),
+                    ],
+                ]
             ],
             [
                 'name' => 'Lesson 6a: Intro to Microbit',
@@ -193,7 +201,10 @@ class CourseSeeder extends Seeder
                 }
                 
                 $a->activityable_type = get_class($c);
-                $a->link = $c->link;
+
+                if ($c->body !== null) { $a->body = $c->body; }
+                if ($c->link !== null) { $a->link = $c->link; }
+                if ($c->videos !== null) { $a->videos = $c->videos; }
                 $a->save();
 
                 // Save activity to topics
