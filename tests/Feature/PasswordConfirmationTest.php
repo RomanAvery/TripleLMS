@@ -3,43 +3,33 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laravel\Jetstream\Features;
 use Tests\TestCase;
 
-class PasswordConfirmationTest extends TestCase
-{
-    use RefreshDatabase;
+test('confirm password screen can be shown', function () {
+    $user = User::factory()->create();
 
-    public function test_confirm_password_screen_can_be_rendered()
-    {
-        $user = User::factory()->withPersonalTeam()->create();
+    $res = $this->actingAs($user)->get('/user/confirm-password');
 
-        $response = $this->actingAs($user)->get('/user/confirm-password');
+    $res->assertStatus(200);
+});
 
-        $response->assertStatus(200);
-    }
+test('password can be confirmed', function () {
+    $user = User::factory()->create();
 
-    public function test_password_can_be_confirmed()
-    {
-        $user = User::factory()->create();
+    $res = $this->actingAs($user)->post('/user/confirm-password', [
+        'password' => 'password',
+    ]);
 
-        $response = $this->actingAs($user)->post('/user/confirm-password', [
-            'password' => 'password',
-        ]);
+    $res->assertRedirect();
+    $res->assertSessionHasNoErrors();
+});
 
-        $response->assertRedirect();
-        $response->assertSessionHasNoErrors();
-    }
+test('wrong password cannot be confirmed', function () {
+    $user = User::factory()->create();
 
-    public function test_password_is_not_confirmed_with_invalid_password()
-    {
-        $user = User::factory()->create();
+    $res = $this->actingAs($user)->post('/user/confirm-password', [
+        'password' => 'wrong-password',
+    ]);
 
-        $response = $this->actingAs($user)->post('/user/confirm-password', [
-            'password' => 'wrong-password',
-        ]);
-
-        $response->assertSessionHasErrors();
-    }
-}
+    $res->assertSessionHasErrors();
+});
