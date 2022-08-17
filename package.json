@@ -64,6 +64,7 @@
         "timeme.js": "^2.1.0",
         "vue-cal": "^4.2.0",
         "vue-file-agent": "^1.7.3",
+        "vue-gtag": "^2.0.1",
         "vue-moment": "^4.1.0",
         "vue-screen": "^2.1.0-beta.1",
         "vue3-carousel": "^0.1.40",

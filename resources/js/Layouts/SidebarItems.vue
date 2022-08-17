@@ -28,7 +28,6 @@ import { Link } from '@inertiajs/inertia-vue3'
                                 class="p-2 w-full hover:bg-gray-200 inline-block"
                                 :class="{ 'active-activity': act.id === activity.id }"
                             >
-                                <span class="inline-block pr-2" style="height:18px;" v-html="icons[act.type]"></span>
                                 <!--<span v-if="t.completed">&#9745;</span>-->
                                 {{ act.name }}
                             </Link>
@@ -45,7 +44,6 @@ export default {
     props: {
         topic: Object,
         topics: Object,
-        icons: Object,
         activity: Object,
     }
 }

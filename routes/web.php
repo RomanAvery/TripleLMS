@@ -26,11 +26,7 @@ Route::get('/callback/microsoft', [SocialiteController::class, 'handleMicrosoftC
 
 Route::get('/', function () {
     $content = [
-        'columns' => [
-            nova_get_setting('featured_column_1'),
-            nova_get_setting('featured_column_2'),
-            nova_get_setting('featured_column_3'),
-        ],
+        'featured' => nova_get_setting('featured_column'),
         'main' => nova_get_setting('main_content'),
     ];
 
@@ -47,16 +43,6 @@ Route::get('/', function () {
     return Inertia::render('Index')
         ->with(compact('images', 'content'));
 })->name('index');
-
-Route::get('/logo', function () {
-    if (file_exists(storage_path('app/public/' . nova_get_setting('logo_frontend')))) {
-        return null;
-    }
-
-    return response([
-        'url' => \Illuminate\Support\Facades\URL::asset( 'storage/'. nova_get_setting('logo_frontend'))
-    ]);
-})->name('logo');
 
 Route::middleware([
     'auth:sanctum',

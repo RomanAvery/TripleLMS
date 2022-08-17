@@ -26,3 +26,8 @@ Artisan::command('run', function () {
     $this->call('migrate', ['--force' => true]);
     $this->call('db:seed', ['--force' => true]);
 })->purpose('Run commands ready for production run');
+
+// Overwrite to use Pest instead of PHPUnit for browser testing
+Artisan::command('dusk', function () {
+    $this->call('pest:dusk');
+});

@@ -1,13 +1,13 @@
 <template>
     <div v-if="activity.allow_comments">
         <hr />
-        <div class="py-2">
+        <div class="px-4 py-2">
             <h1 class="text-90 font-normal text-2xl mb-3">
                 Comments
             </h1>
         </div>
 
-        <div class="card mb-6 py-4 px-6" v-if="!showReplies">
+        <div class="mb-6 px-4" v-if="!showReplies">
             <div>
                 <button 
                     class="btn-outline-primary"
@@ -18,7 +18,7 @@
                     v-else
                     @click="addNew = false">- Hide Comment Form</button>
             </div>
-            <div class="text-center shadow-md rounded-lg mb-4 p-4" v-if="addNew">
+            <div class="text-center mb-4 p-4" v-if="addNew">
                 <vue-editor v-model="comment" :editor-toolbar="customToolbar"  />
 
                 <button

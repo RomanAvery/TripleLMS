@@ -10,7 +10,6 @@ import { Link } from '@inertiajs/inertia-vue3'
         :topics="topics"
         :activity="activity"
         :fullHeight="true"
-        :icons="icons"
     >
         <div class="max-w-7xl mx-auto md:px-6 lg:px-8">
             <div class="md:p-4 bg-white shadow-xl sm:rounded-lg">
@@ -34,6 +33,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
                     <text-activity v-if="activity.type == 'TEXT'" :activity="activity" :user="user"></text-activity>
 
+                    <video-grid-activity v-if="activity.type = 'VIDEO_GRID'" :activity="activity" :user="user" />
                 </div>
 
 
@@ -50,13 +50,14 @@ import { Link } from '@inertiajs/inertia-vue3'
 </template>
 
 <script>
-    import sidebarIcons from './SidebarIcons.js'
+    import { pageview, event } from 'vue-gtag';
 
     import ExerciseActivity from "./Activities/Exercise.vue";
     import H5pActivity from './Activities/H5p.vue';
     import QualtricsActivity from './Activities/Qualtrics.vue';
     import MakeCodeActivity from './Activities/MakeCode.vue';
     import TextActivity from './Activities/Text.vue';
+    import VideoGridActivity from './Activities/VideoGrid.vue';
     import Comments from "./Comments.vue";
 
     export default {
@@ -66,6 +67,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             ExerciseActivity,
             MakeCodeActivity,
             TextActivity,
+            VideoGridActivity,
             Comments,
         },
 
@@ -76,12 +78,20 @@ import { Link } from '@inertiajs/inertia-vue3'
             user: Object,
         },
 
+        track() {
+            pageview('test');
+            event("view_topic", {
+                'event_category': "general",
+                'event_label': "View a topic",
+                'value': this.topic.id,
+            });
+        },
+
         data: () => {
           return {
               open: false,
               dimmer: true,
               right: false,
-              icons: Object,
               prev_url: null,
               next_url: null,
           }
@@ -92,7 +102,6 @@ import { Link } from '@inertiajs/inertia-vue3'
         },
 
         mounted() {
-            this.icons = sidebarIcons;
             this.getNav();
         },
 

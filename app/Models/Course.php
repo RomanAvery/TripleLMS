@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\AccessCode;
 
+use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Tags\HasTags;
@@ -38,7 +40,7 @@ class Course extends Model
     public function getCoverPathAttribute()
     {
         $random = rand(1,6);
-        return is_null($this->cover) ? "/img/courses/covers/cover-{$random}.jpg" : '/storage/' . $this->cover;
+        return is_null($this->cover) ? "/img/courses/covers/cover-{$random}.jpg" : Storage::url($this->cover);
     }
 
     public function ts_channels()

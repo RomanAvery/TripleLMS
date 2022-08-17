@@ -7,6 +7,7 @@ use App\Models\TypesActivities\H5P;
 use App\Models\TypesActivities\Qualtrics;
 use App\Models\TypesActivities\MakeCode;
 use App\Models\TypesActivities\Text;
+use App\Models\TypesActivities\VideoGrid;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -57,6 +58,7 @@ class Activity extends Model implements Sortable
         H5P::class,
         Qualtrics::class,
         MakeCode::class,
+        VideoGrid::class,
     ];
 
     protected static function updateActivityType($model) {
@@ -81,7 +83,7 @@ class Activity extends Model implements Sortable
 
             case 'App\Models\TypesActivities\Text':
                 $text = Text::create([
-                    'link' => $model->body,
+                    'body' => $model->body,
                 ]);
                 $model->activityable_type = Text::class;
                 $model->activityable_id = $text->id;
@@ -95,6 +97,15 @@ class Activity extends Model implements Sortable
                 $model->activityable_type = MakeCode::class;
                 $model->activityable_id = $text->id;
                 unset($model->link);  # Unset the link so we don't get an error
+                break;
+
+            case 'App\Models\TypesActivities\VideoGrid':
+                $grid = VideoGrid::create([
+                    'videos' => $model->videos,
+                ]);
+                $model->activityable_type = VideoGrid::class;
+                $model->activityable_id = $grid->id;
+                unset($model->videos);
                 break;
 
             default:
@@ -117,7 +128,7 @@ class Activity extends Model implements Sortable
         });
 
         static::updating(function ($model) {
-            if ($model->link !== null || $model->body !== null) {
+            if ($model->link !== null || $model->body !== null || $model->videos !== null) {
                 static::updateActivityType($model);
             }
         });
