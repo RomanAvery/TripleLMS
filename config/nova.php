@@ -158,7 +158,7 @@ return [
     'storage_disk' => env('NOVA_STORAGE_DISK', 'public'),
 
     'brand' => [
-        //'logo' => storage_path(nova_get_setting('logo_frontend')),
+        'logo' => env('NOVA_LOGO_PATH', ''),
         'colors' => [
             "400" => "24, 182, 155, 0.5",
             "500" => "24, 182, 155",

@@ -40,12 +40,16 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $site_logo = nova_get_setting('logo_frontend');
+        $site_brand = nova_get_setting('brand_image');
 
         return array_merge(parent::share($request), [
             // Add site-wide settings
             'settings.title' => nova_get_setting('site_title') ?? config('app.name', 'TripleLMS'),
             'settings.logo' => ($site_logo !== null && Storage::exists($site_logo))
                 ? Storage::url($site_logo)
+                : null,
+            'settings.brand' => ($site_brand !== null && Storage::exists($site_brand))
+                ? Storage::url($site_brand)
                 : null,
             'settings.ga' => nova_get_setting('ga_tag') ?? null,
 

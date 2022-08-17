@@ -19,6 +19,8 @@ use Lms\CourseGradebook\CourseGradebook;
 use Lms\Gradebook\Gradebook;
 use Lms\StudentGradebook\StudentGradebook;
 
+use Illuminate\Support\Facades\Blade;
+
 use Eminiarts\Tabs\Tab;
 use Eminiarts\Tabs\Tabs;
 use Itsmejoshua\Novaspatiepermissions\Novaspatiepermissions;
@@ -39,21 +41,29 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         \Outl1ne\NovaSettings\NovaSettings::addSettingsFields([
             Text::make('Site Title', 'site_title'),
             Image::make('Logo', 'logo_frontend'),
+            Image::make('Brand Image', 'brand_image'),
+            Image::make('Favicon', 'favicon'),
             Text::make('Google Analytics Tag', 'ga_tag'),
         ]);
 
         \Outl1ne\NovaSettings\NovaSettings::addSettingsFields([
             Textarea::make('Slideshow Images', 'slideshow_images')
                 ->help('Enter multiple URLs seperated by a comma.'),
-            TinymceEditor::make('Featured Column 1', 'featured_column_1'),
-            TinymceEditor::make('Featured Column 2', 'featured_column_2'),
-            TinymceEditor::make('Featured Column 3', 'featured_column_3'),
+            TinymceEditor::make('Featured Column', 'featured_column_'),
             TinymceEditor::make('Main Content', 'main_content'),
         ], [], 'Homepage');
 
         \Outl1ne\NovaSettings\NovaSettings::addSettingsFields([
             
         ], [], 'Global Settings');
+
+        Nova::footer(function ($request) {
+            return Blade::render('
+                <div class="mt-8 leading-normal text-xs text-gray-500 space-y-1">
+                    <p class="text-center">© {{ date("Y") }} Victoria University of Wellington · by Roman Avery.</p>
+                </div>
+            ');
+        });
     }
 
     /**

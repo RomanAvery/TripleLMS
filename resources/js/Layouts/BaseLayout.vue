@@ -36,14 +36,27 @@ const logout = () => {
 
         <JetBanner />
 
-        <div class="min-h-screen bg-gray-100">
-            <nav class="z-50 bg-white border-b border-gray-100 w-full" :class="{ 'relative': !fullHeight, 'absolute md:fixed': fullHeight }">
+        <div class="min-h-screen">
+            <nav class="z-50 bg-white w-full" :class="{ 'relative': !fullHeight, 'absolute md:fixed': fullHeight }">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-                    <div class="flex justify-between h-16">
+                    <div class="flex justify-between h-20">
+                        
+
+                        <div class="flex">
+                            <!-- Logo -->
+                            <div class="shrink-0 flex items-center">
+                                <Link :href="route('index')">
+                                    <JetApplicationMark class="block h-14 w-auto" />
+                                </Link>
+                            </div>
+                        </div>
+
+                        <div class="flex md:hidden"></div>
+
                         <!-- Hamburger -->
-                        <div class="-mr-2 flex items-center md:hidden">
-                            <button class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition" @click="showingNavigationDropdown = ! showingNavigationDropdown">
+                        <div class="-mr-2 flex items-center">
+                            <button class="inline-flex items-center justify-center p-2 rounded-full text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition" @click="showingNavigationDropdown = ! showingNavigationDropdown">
                                 <svg
                                     class="h-6 w-6"
                                     stroke="currentColor"
@@ -67,29 +80,6 @@ const logout = () => {
                                 </svg>
                             </button>
                         </div>
-
-                        <div class="flex">
-                            <!-- Logo -->
-                            <div class="shrink-0 flex items-center">
-                                <Link :href="route('index')">
-                                    <JetApplicationMark class="block h-9 w-auto" />
-                                </Link>
-                            </div>
-
-                            <!-- Navigation Links -->
-                            <div class="hidden space-x-8 md:-my-px md:ml-10 md:flex">
-                                <slot name="links-left" />
-                            </div>
-                        </div>
-
-                        <div class="hidden md:flex md:items-center md:ml-6">
-                            <!-- Settings Dropdown -->
-                            <div class="ml-3 relative">
-                                <slot name="links-right" />
-                            </div>
-                        </div>
-
-                        <div class="flex md:hidden"></div>
                     </div>
                 </div>
 
@@ -101,15 +91,21 @@ const logout = () => {
                 </header>
 
                 <!-- Responsive Navigation Menu -->
-                <div :class="{ 'block': showingNavigationDropdown, 'hidden': !showingNavigationDropdown }" class="md:hidden">
-                    <slot name="responsive-links" />
+                <div
+                    :class="{ 'block': showingNavigationDropdown, 'hidden': !showingNavigationDropdown }"
+                    class="relative h-screen"
+                >
+                    <div class="">
+                        <slot name="responsive-links" />
+                    </div>
+                    
                 </div>
             </nav>
 
             <Alerts />
 
             <!-- Page Content -->
-            <main :class="{ 'hidden': (showingNavigationDropdown && !$grid.md), 'block': (!showingNavigationDropdown || $grid.md) }">
+            <main :class="{ 'hidden': showingNavigationDropdown, 'block': !showingNavigationDropdown }">
                 <slot />
             </main>
         </div>
