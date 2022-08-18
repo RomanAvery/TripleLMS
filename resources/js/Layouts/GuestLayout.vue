@@ -15,8 +15,9 @@ defineProps({
                 <JetResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                     Student
                 </JetResponsiveNavLink>
+                <hr class="mx-4 border-b-1 border-gray-400" />
                 <JetResponsiveNavLink :href="route('nova.pages.home')">
-                    Teacher
+                    Teacher Login
                 </JetResponsiveNavLink>
             </div>
         </template>
