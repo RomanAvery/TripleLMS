@@ -22,7 +22,6 @@ import { Link } from '@inertiajs/inertia-vue3'
                 </div>
 
                 <div v-else class="pb-4 mb-8 container m-auto bg-white shadow rounded-lg"><!-- overflow-scroll">-->
-
                     <exercise-activity v-if="activity.type == 'EXERCISE'" :activity="activity" :user="user"></exercise-activity>
 
                     <h5p-activity v-if="activity.type == 'H5P'" :activity="activity" :user="user" />
@@ -33,7 +32,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
                     <text-activity v-if="activity.type == 'TEXT'" :activity="activity" :user="user"></text-activity>
 
-                    <video-grid-activity v-if="activity.type = 'VIDEO_GRID'" :activity="activity" :user="user" />
+                    <video-grid-activity v-if="activity.type == 'VIDEO_GRID'" :activity="activity" :user="user" />
                 </div>
 
 
@@ -103,6 +102,8 @@ import { Link } from '@inertiajs/inertia-vue3'
 
         mounted() {
             this.getNav();
+            console.log(this.topic);
+            console.log(this.activity);
         },
 
         methods: {
