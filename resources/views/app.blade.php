@@ -5,7 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        @if (nova_get_setting('favicon') !== null)
         <link rel="icon" href="{{ \Illuminate\Support\Facades\Storage::url(nova_get_setting('favicon')) }}">
+        @endif
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
@@ -17,10 +19,10 @@
         @vite('resources/js/app.js')
         @inertiaHead
     </head>
-    
+
     <body class="font-sans antialiased">
         @inertia
     </body>
-    
+
     <script src="https://vuwcourses.h5p.com/js/h5p-resizer.js" charset="UTF-8"></script>
 </html>

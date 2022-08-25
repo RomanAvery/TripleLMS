@@ -6,8 +6,8 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 test('homepage', function () {
-    /*$this->browse(function (Browser $browser) {
+    $this->browse(function (Browser $browser) {
         $browser->visit('/')
-                ->assertSee('Laravel');
-    });*/
+                ->assertSee('Test content');
+    });
 });

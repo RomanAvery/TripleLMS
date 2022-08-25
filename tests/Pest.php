@@ -17,6 +17,18 @@ uses(Tests\TestCase::class)
     })
     ->in('Feature');
 
+uses(Tests\TestCase::class)
+    ->beforeEach(function () {
+        $this->seed(DatabaseSeeder::class);
+    })
+    ->in('Unit');
+
+uses(Tests\DuskTestCase::class)
+    ->beforeEach(function () {
+        $this->seed(DatabaseSeeder::class);
+    })
+    ->in('Browser');
+
 /*
 |--------------------------------------------------------------------------
 | Expectations

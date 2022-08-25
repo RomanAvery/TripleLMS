@@ -51,6 +51,7 @@ class HandleInertiaRequests extends Middleware
             'settings.brand' => ($site_brand !== null && Storage::exists($site_brand))
                 ? Storage::url($site_brand)
                 : null,
+            'settings.featured_image_background' => nova_get_setting('featured_image_background') ?? false,
             'settings.ga' => nova_get_setting('ga_tag') ?? null,
 
             'flash' => [

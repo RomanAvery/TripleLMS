@@ -42,11 +42,14 @@
         padding: 22px;
     }
 
-
     .activity-header h1, .comment-title h1{
         color: #fff;
         font-weight: bold;
         font-size: 2rem;
         text-align: center;
+    }
+
+    .feature-image {
+        background-color: rgb(0 0 0 / 0.5);
     }
 }
