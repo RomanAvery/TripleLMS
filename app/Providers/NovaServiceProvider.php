@@ -7,6 +7,7 @@ use App\Nova\Dashboards\Main;
 use App\Models\Roles;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Cards\Help;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
@@ -47,6 +48,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         ]);
 
         \Outl1ne\NovaSettings\NovaSettings::addSettingsFields([
+            Boolean::make('Enable background for featured image', 'featured_image_background'),
             Textarea::make('Slideshow Images', 'slideshow_images')
                 ->help('Enter multiple URLs seperated by a comma.'),
             TinymceEditor::make('Featured Column', 'featured_column_'),
@@ -54,7 +56,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         ], [], 'Homepage');
 
         \Outl1ne\NovaSettings\NovaSettings::addSettingsFields([
-            
+
         ], [], 'Global Settings');
 
         Nova::footer(function ($request) {
