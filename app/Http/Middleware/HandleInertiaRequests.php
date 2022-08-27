@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\URL;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;

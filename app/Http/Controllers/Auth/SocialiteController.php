@@ -34,20 +34,20 @@ class SocialiteController extends Controller
     public function handleCallback($driver)
     {
         try {
-     
+
             $user = Socialite::driver($driver)->stateless()->user();
-      
+
             $finduser = User::where('social_id', $user->id)->first();
 
             if ($finduser === null) {
                 $finduser = User::where('email', $user->email)->first();
             }
-      
+
             if ($finduser) {
                 Auth::login($finduser);
-     
-                return redirect()->route('dashboard');
-      
+
+                return redirect()->route('courses.index');
+
             } else {
                 $newUser = User::updateOrCreate([
                     'name' => $user->name,
@@ -56,12 +56,12 @@ class SocialiteController extends Controller
                     'social_type'=> $driver,
                     'password' => encrypt("my-{$driver}")
                 ]);
-     
+
                 Auth::login($newUser);
-      
-                return redirect()->route('dashboard');
+
+                return redirect()->route('courses.index');
             }
-     
+
         } catch (Exception $e) {
             dd($e);
         }

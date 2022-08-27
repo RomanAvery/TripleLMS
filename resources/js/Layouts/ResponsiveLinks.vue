@@ -4,8 +4,14 @@ import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue';
 
 <template>
     <div class="pt-2 pb-3 space-y-1">
-        <JetResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-            Dashboard
+        <JetResponsiveNavLink :href="route('index')" :active="route().current('index')">
+            Home
+        </JetResponsiveNavLink>
+        <JetResponsiveNavLink :href="route('courses.index')" :active="route().current('courses.index')">
+            Courses
+        </JetResponsiveNavLink>
+        <JetResponsiveNavLink :href="route('awards')" :active="route().current('awards')">
+            Awards
         </JetResponsiveNavLink>
     </div>
 

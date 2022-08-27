@@ -6,7 +6,7 @@
     <app-layout :title="`Overview - ${course.name}`">
         <template #header>
             <ul>
-                <li><Link class="text-blue-500 underline" :href="route('dashboard')">Home</Link> / Course: {{ course.name }} / Overview</li>
+                <li><Link class="text-blue-500 underline" :href="route('courses.index')">Home</Link> / Course: {{ course.name }} / Overview</li>
             </ul>
         </template>
 

@@ -41,6 +41,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                     <div v-else></div>
 
                     <Link class="btn-outline-primary" :href="next_url" v-if="next_url">Next &gt;</Link>
+                    <Link class="btn-outline-success" :href="route('courses.finish', topic.course.id)" v-else-if="prev_url && !next_url">Finish Course</Link>
                     <div v-else></div>
                 </div>
             </div>

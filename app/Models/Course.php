@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\AccessCode;
-
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,6 +28,11 @@ class Course extends Model
     public function access_codes()
     {
         return $this->hasMany(AccessCode::class);
+    }
+
+    public function award()
+    {
+        return $this->hasOne(Award::class);
     }
 
     public function topics()

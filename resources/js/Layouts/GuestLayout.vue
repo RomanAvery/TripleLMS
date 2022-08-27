@@ -12,8 +12,11 @@ defineProps({
     <BaseLayout :title="title">
         <template #responsive-links>
             <div class="pt-2 pb-3 space-y-1">
-                <JetResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                    Student
+                <JetResponsiveNavLink :href="route('index')" :active="route().current('index')">
+                    Home
+                </JetResponsiveNavLink>
+                <JetResponsiveNavLink :href="route('courses.index')" :active="route().current('dashboard')">
+                    Student Login
                 </JetResponsiveNavLink>
                 <hr class="mx-4 border-b-1 border-gray-400" />
                 <JetResponsiveNavLink :href="route('nova.pages.home')">

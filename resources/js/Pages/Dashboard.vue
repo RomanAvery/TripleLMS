@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <AppLayout title="Dashboard">
+    <AppLayout title="Courses">
 
         <section>
             <div class="container m-auto mt-6 mb-6 flex flex-col md:flex-row items-center justify-between bg-white shadow-lg">
