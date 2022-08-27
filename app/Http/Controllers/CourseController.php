@@ -52,7 +52,7 @@ class CourseController extends Controller
         $topic = Topic::find($id);
 
         if ($topic === null) abort(404);
-        
+
         if ($activity_id === null) {
             $activity = $topic->activities->where('isShow', true)->first();
         } else {
@@ -76,5 +76,28 @@ class CourseController extends Controller
 
         return Inertia::render('Course/Topic')
             ->with(compact('topic', 'activity', 'topics'));
+    }
+
+    public function finish($id)
+    {
+        $course = Course::find($id);
+        if ($course === null) abort(404);
+
+        $user = auth()?->user();
+        activity()
+            ->performedOn($course)
+            ->causedBy(auth()?->user())
+            ->withProperties([ 'type' => 'finish course' ])
+            ->log("User '{$user->name}' finished course '{$course->name}'.");
+
+        if ($user !== null &&
+            $course->award !== null &&
+            !$user->awards->contains($course->award)
+        ) {
+            $user->awards()->save($course->award);
+        }
+
+        return Inertia::render('Course/Finished')
+            ->with(compact('course'));
     }
 }

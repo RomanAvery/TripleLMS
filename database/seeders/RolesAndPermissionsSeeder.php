@@ -52,6 +52,12 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::updateOrCreate(['name' => 'update access code']);
         Permission::updateOrCreate(['name' => 'delete access code']);
 
+        Permission::updateOrCreate(['name' => 'list awards']);
+        Permission::updateOrCreate(['name' => 'show award']);
+        Permission::updateOrCreate(['name' => 'create award']);
+        Permission::updateOrCreate(['name' => 'update award']);
+        Permission::updateOrCreate(['name' => 'delete award']);
+
         Permission::updateOrCreate(['name' => 'manage settings']);
         Permission::updateOrCreate(['name' => 'manage roles']);
         Permission::updateOrCreate(['name' => 'manage translations']);

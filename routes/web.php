@@ -15,6 +15,7 @@ use Inertia\Inertia;
 |
 */
 use \App\Http\Controllers\AccessCodeController;
+use \App\Http\Controllers\AwardController;
 use \App\Http\Controllers\CourseController;
 use \App\Http\Controllers\CommentController;
 use App\Http\Controllers\Auth\SocialiteController;
@@ -31,7 +32,7 @@ Route::get('/', function () {
     ];
 
     $images = explode(",", nova_get_setting('slideshow_images')) ?? null;
-    
+
     if ($images === null) {
         // Set default images
         $images = [
@@ -49,11 +50,17 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function() {
-    Route::get('/dashboard', [CourseController::class, 'index'])
-        ->name('dashboard');
+    Route::get('/awards', [AwardController::class, 'index'])
+        ->name('awards');
+
+    Route::get('/courses', [CourseController::class, 'index'])
+        ->name('courses.index');
 
     Route::get('/courses/{id}', [CourseController::class, 'show'])
         ->name('courses.show');
+
+    Route::get('/courses/{id}/finish', [CourseController::class, 'finish'])
+        ->name('courses.finish');
 
     Route::get('/courses/topic/{id}/{activity_id?}', [CourseController::class, 'topic'])
         ->name('courses.topic');
@@ -85,7 +92,7 @@ Route::middleware([
     Route::get('/notifications', function () {
         return auth()->user()->notifications;
     })->name('notifications.list');
-    
+
     Route::delete('/notifications', function () {
         return auth()->user()->notifications->each->delete();
     })->name('notifications.delete');

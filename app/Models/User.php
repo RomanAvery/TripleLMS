@@ -126,6 +126,11 @@ class User extends Authenticatable
             ->withPivot('score', 'comment', 'file', 'created_at', 'updated_at', 'text');
     }
 
+    public function awards()
+    {
+        return $this->belongsToMany(Award::class);
+    }
+
     public function gradeExercise($id, $score = 0, $comment = '', $exercise = '')
     {
         $activity = Activity::find($id);
