@@ -34,11 +34,7 @@ const logout = () => {
     <BaseLayout :title="title" :fullHeight="fullHeight">
         <!-- Page Heading -->
         <template v-if="$slots.header" #heading>
-            <header  class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <slot name="header" />
-                </div>
-            </header>
+            <slot name="header" />
         </template>
 
         <template #responsive-links>
