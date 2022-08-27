@@ -41,7 +41,7 @@ const logout = () => {
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
                     <div class="flex justify-between h-20">
-                        
+
 
                         <div class="flex">
                             <!-- Logo -->
@@ -95,17 +95,14 @@ const logout = () => {
                     :class="{ 'block': showingNavigationDropdown, 'hidden': !showingNavigationDropdown }"
                     class="relative h-screen"
                 >
-                    <div class="">
-                        <slot name="responsive-links" />
-                    </div>
-                    
+                    <slot name="responsive-links" />
                 </div>
             </nav>
 
             <Alerts />
 
             <!-- Page Content -->
-            <main :class="{ 'hidden': showingNavigationDropdown, 'block': !showingNavigationDropdown }">
+            <main class="bg-gray-100" :class="{ 'hidden': showingNavigationDropdown, 'block': !showingNavigationDropdown }">
                 <slot />
             </main>
         </div>
