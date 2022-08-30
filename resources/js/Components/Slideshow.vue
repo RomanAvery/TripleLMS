@@ -6,7 +6,7 @@
                 v-for="image in images"
                 class="absolute min-w-[100vw] object-cover full-height"
             >
-                <img class="h-full w-auto md:w-1/2" :src="image" />
+                <img class="h-full w-full md:w-1/2" :src="image" />
             </div>
         </div>
     </section>
@@ -59,10 +59,10 @@
             }
         },
         mounted() {
-            setInterval(this.newImage, this.delay);
+            this.timer = setInterval(this.newImage, this.delay);
         },
         beforeUnmount() {
-            this.running = false;
+            clearInterval(this.timer);
         }
     }
 </script>
