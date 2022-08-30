@@ -15,7 +15,9 @@
         "build-course-gradebook": "cd nova-components/CourseGradebook && npm run dev",
         "build-course-gradebook-prod": "cd nova-components/CourseGradebook && npm run prod",
         "build-inline-morph-to": "cd nova-components/InlineMorphTo && npm run dev",
-        "build-inline-morph-to-prod": "cd nova-components/InlineMorphTo && npm run prod"
+        "build-inline-morph-to-prod": "cd nova-components/InlineMorphTo && npm run prod",
+        "build-image-list": "cd nova-components/ImageList && npm run dev",
+        "build-image-list-prod": "cd nova-components/ImageList && npm run prod"
     },
     "devDependencies": {
         "@editorjs/attaches": "^1.1.0",
@@ -67,7 +69,6 @@
         "vue-gtag": "^2.0.1",
         "vue-moment": "^4.1.0",
         "vue-screen": "^2.1.0-beta.1",
-        "vue3-carousel": "^0.1.40",
         "vue3-editor": "^0.1.1"
     }
 }

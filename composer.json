@@ -51,12 +51,17 @@
         "spatie/nova-tags-field": "^4.0.3",
         "tightenco/ziggy": "^1.4",
         "wdelfuego/nova-datetime": "^1.1",
-        "whitecube/nova-flexible-content": "^1.0.0"
+        "whitecube/nova-flexible-content": "^1.0.0",
+        "avery/image-list": "*"
     },
     "repositories": [
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/ImageList"
         }
     ],
     "require-dev": {
