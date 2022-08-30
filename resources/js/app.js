@@ -21,7 +21,7 @@ createInertiaApp({
         createApp({ render: () => h(app, props) })
             .use(plugin)
             .use(ZiggyVue)
-            .use(VueGtag, { 
+            .use(VueGtag, {
                 config: { id: props?.initialPage?.props?.settings?.ga },
                 params: {
                     user_id: props?.initialPage?.props?.user?.id
@@ -33,3 +33,6 @@ createInertiaApp({
 });
 
 InertiaProgress.init({ color: '#4B5563' });
+
+let sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+window.sleep = sleep;
