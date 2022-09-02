@@ -11,11 +11,11 @@
         </template>
 
         <section class="container m-auto mt-6 px-4 pb-6 w-full lg:w-1/2">
-            <header class=" shadow rounded-lg p-8 md:h-48 sm:h-32  bg-cover"
+            <header class="shadow rounded-lg p-8 md:h-48 sm:h-32 bg-contain bg-no-repeat bg-center"
                 :style="`background-image: url('${course.coverPath}')`"
             >
                 <div>
-                    <h1 class="text-2xl text-white font-bold">
+                    <h1 class="text-2xl text-black font-bold">
                         {{ course.name }} <span class="text-sm text-white">{{ course.code }}</span>
                     </h1>
                 </div>
