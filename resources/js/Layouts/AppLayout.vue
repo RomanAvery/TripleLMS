@@ -1,7 +1,6 @@
 <script setup>
     import BaseLayout from '@/Layouts/BaseLayout.vue';
 import { ref } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import Notifications from '@/Layouts/Notifications.vue';
 //import Alerts from '@/Components/Alerts.vue';
@@ -24,10 +23,6 @@ defineProps({
         default: false
     },
 });
-
-const logout = () => {
-    Inertia.post(route('logout'));
-};
 </script>
 
 <template>
@@ -38,7 +33,7 @@ const logout = () => {
         </template>
 
         <template #responsive-links>
-            <ResponsiveLinks @logout="logout">
+            <ResponsiveLinks>
                 <slot name="sidebar" />
             </ResponsiveLinks>
         </template>

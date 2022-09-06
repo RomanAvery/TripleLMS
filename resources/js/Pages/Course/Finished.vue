@@ -11,7 +11,7 @@
             </ul>
         </template>
 
-        <div class="container m-auto my-6 pb-6 flex flex-col md:flex-row items-center justify-between bg-white shadow-lg">
+        <div class="container m-auto my-6 pb-6 flex flex-col items-center justify-between bg-white shadow-lg">
             <h1 class="text-lg">Congratulations, you completed {{ course.name }}!</h1>
             <template v-if="course.award !== null">
                 <p>You also earned this badge:</p>
