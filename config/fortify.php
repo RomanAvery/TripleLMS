@@ -61,7 +61,7 @@ return [
     |
     */
 
-    'home' => route('courses.index'), //RouteServiceProvider::HOME,
+    'home' => env('APP_URL') . RouteServiceProvider::HOME,
 
     /*
     |--------------------------------------------------------------------------
