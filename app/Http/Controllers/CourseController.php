@@ -34,9 +34,16 @@ class CourseController extends Controller
             ->with('topics')
             ->first();
 
-        if ($course === null) abort(404);
-
         $user = auth()?->user();
+
+        if (
+            $course === null ||
+            $user === null ||
+            $user->cannot('view', $course)
+        ) {
+            abort(404);
+        }
+
         activity()
             ->performedOn($course)
             ->causedBy(auth()?->user())
@@ -51,7 +58,15 @@ class CourseController extends Controller
     {
         $topic = Topic::find($id);
 
-        if ($topic === null) abort(404);
+        $user = auth()?->user();
+
+        if (
+            $topic === null ||
+            $user === null ||
+            $user->cannot('view', $topic->course)
+        ) {
+            abort(404);
+        }
 
         if ($activity_id === null) {
             $activity = $topic->activities->where('isShow', true)->first();
@@ -64,7 +79,6 @@ class CourseController extends Controller
 
         if ($activity === null) abort(404);
 
-        $user = auth()?->user();
         activity()
             ->performedOn($activity)
             ->causedBy(auth()?->user())
@@ -81,9 +95,15 @@ class CourseController extends Controller
     public function finish($id)
     {
         $course = Course::find($id);
-        if ($course === null) abort(404);
-
         $user = auth()?->user();
+        if (
+            $course === null ||
+            $user === null ||
+            $user->cannot('view', $course)
+        ) {
+            abort(404);
+        }
+
         activity()
             ->performedOn($course)
             ->causedBy(auth()?->user())

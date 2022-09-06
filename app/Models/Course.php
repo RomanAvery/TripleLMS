@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Support\Facades\Storage;
 
+use Laravel\Nova\Actions\Actionable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Tags\HasTags;
@@ -12,6 +13,7 @@ use Chelout\RelationshipEvents\Concerns\HasBelongsToManyEvents;
 
 class Course extends Model
 {
+    use Actionable;
     use HasFactory;
     use HasUsers;
     use HasBelongsToManyEvents;

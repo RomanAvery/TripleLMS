@@ -37,6 +37,25 @@ class AccessCodeController extends Controller
         }
 
         $user->courses()->save($course);
+
+        // Log activity
+        activity()
+            ->performedOn($course)
+            ->causedBy(auth()?->user())
+            ->withProperties([ 'type' => 'use access code' ])
+            ->log("User '{$user->name}' joined course '{$course->name}' with an access code.");
+
+        if ($code->survey_opt_in) {
+            $user->survey_opt_in = true;
+            $user->save();
+
+            activity()
+                ->performedOn($user)
+                ->causedBy($code)
+                ->withProperties([ 'type' => 'opted in' ])
+                ->log("An access code opted User '{$user->name}' in to surveys.");
+        }
+
         request()->session()->flash('success', "Added you to the course.");
         return back();
     }
