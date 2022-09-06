@@ -4,9 +4,9 @@
             <div
                 :key="image"
                 v-for="image in images"
-                class="absolute min-w-[100vw] object-cover full-height"
+                class="absolute w-screen object-cover full-height"
             >
-                <img class="md:w-[54%] object-cover object-center" :src="image" />
+                <img class="lg:w-1/3 min-h-screen object-cover object-center" :src="image" />
             </div>
         </div>
     </section>
