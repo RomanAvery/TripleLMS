@@ -61,7 +61,7 @@ return [
     |
     */
 
-    'home' => RouteServiceProvider::HOME,
+    'home' => route('courses.index'), //RouteServiceProvider::HOME,
 
     /*
     |--------------------------------------------------------------------------
