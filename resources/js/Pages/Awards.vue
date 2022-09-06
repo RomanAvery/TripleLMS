@@ -7,10 +7,10 @@
     <AppLayout title="Awards">
         <div class="container m-auto my-6 pb-6 px-6 flex flex-col md:flex-row items-center justify-between bg-white shadow-lg">
             <div v-if="awards !== null && awards.length !== 0">
-                <h1 class="text-lg font-bold pb-4">Your Awards</h1>
+                <h1 class="text-lg font-bold py-4">Your Awards</h1>
                 <hr class="pb-4" />
 
-                <div class="grid grid-cols-2 md:grid-cols-3">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     <template :key="award.id" v-for="award in awards">
                         <Award :award="award" />
                     </template>

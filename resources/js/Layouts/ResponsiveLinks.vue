@@ -8,7 +8,7 @@
 </script>
 
 <template>
-    <div class="pt-2 pb-3 space-y-1">
+    <div class="pt-2 pb-1 space-y-1">
         <JetResponsiveNavLink :href="route('index')" :active="route().current('index')">
             Home
         </JetResponsiveNavLink>
@@ -19,13 +19,13 @@
             <JetResponsiveNavLink :href="route('awards')" :active="route().current('awards')">
                 Awards
             </JetResponsiveNavLink>
-            <hr class="mx-4 border-b-1 border-gray-400" />
+            <hr class="border-t border-gray-200" />
             <JetResponsiveNavLink :href="route('nova.login')" :active="route().current('nova.login')">
                 Teacher Area
             </JetResponsiveNavLink>
         </template>
         <template v-else>
-            <hr class="mx-4 border-b-1 border-gray-400" />
+            <hr class="border-t border-gray-200" />
             <JetResponsiveNavLink :href="route('login')" :active="route().current('login')">
                 Login
             </JetResponsiveNavLink>
@@ -39,7 +39,7 @@
     <slot />
 
     <!-- Responsive Settings Options -->
-    <div v-if="$page.props.user" class="pt-4 pb-1 border-t border-gray-200">
+    <div v-if="$page.props.user" class="pt-3 pb-1 border-t border-gray-200">
         <div class="flex items-center px-4">
             <div v-if="$page.props.jetstream?.managesProfilePhotos" class="shrink-0 mr-3">
                 <img class="h-10 w-10 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name">
