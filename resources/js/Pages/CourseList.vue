@@ -27,9 +27,9 @@
                     <section class="grid  lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
                         <Link v-for="course in filteredList"  :key="course.id"  :href="`/courses/${course.id}`">
                             <div class="p-2  w-full lg:max-w-full lg:flex">
-                                <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" :style="`background-image: url('${course.coverPath}')`" title="Woman holding a mug">
+                                <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover bg-center border-r border-l border-t border-gray-400 lg:border-r-0 lg:border-y lg:border-gray-400 bg-white rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" :style="`background-image: url('${course.coverPath}')`" title="Course Cover">
                                 </div>
-                                <div class="w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                                <div class="w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-gray-50 rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                                     <div class="mb-8">
                                         <div class="text-gray-900 font-bold text-xl mb-2">
                                             {{ course.name }}

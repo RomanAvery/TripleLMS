@@ -97,3 +97,7 @@ Route::middleware([
         return auth()->user()->notifications->each->delete();
     })->name('notifications.delete');
 });
+
+Route::any('/{any}', function () {
+    abort(404);
+})->where('any', '.*');

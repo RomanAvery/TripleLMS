@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Course;
 use App\Models\User;
+use App\Models\Roles;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CoursePolicy
@@ -30,7 +31,14 @@ class CoursePolicy
      */
     public function view(User $user, Course $course)
     {
-       return $user->can('show course') || $user->can('show only my course');
+        return
+            (
+                $user->can('show course') ||
+                $user->can('show only my course')
+            ) && (
+                $user->courses->contains($course) ||
+                $user->hasRole([Roles::ADMIN, Roles::SUPER_ADMIN])
+            );
     }
 
     /**

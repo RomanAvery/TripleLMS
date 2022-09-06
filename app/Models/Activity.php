@@ -10,6 +10,7 @@ use App\Models\TypesActivities\Text;
 use App\Models\TypesActivities\VideoGrid;
 
 use Carbon\Carbon;
+use Laravel\Nova\Actions\Actionable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\EloquentSortable\Sortable;
@@ -17,7 +18,7 @@ use Spatie\EloquentSortable\SortableTrait;
 
 class Activity extends Model implements Sortable
 {
-    use HasFactory, SortableTrait;
+    use Actionable, HasFactory, SortableTrait;
 
     protected $guarded = [];
 

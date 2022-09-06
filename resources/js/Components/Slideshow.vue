@@ -6,7 +6,7 @@
                 v-for="image in images"
                 class="absolute min-w-[100vw] object-cover full-height"
             >
-                <img class="h-full w-full md:w-1/2" :src="image" />
+                <img class="h-full w-full md:w-1/2 object-cover" :src="image" />
             </div>
         </div>
     </section>

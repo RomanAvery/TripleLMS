@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use Inertia\Inertia;
+
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -42,5 +44,28 @@ class Handler extends ExceptionHandler
         }
 
         parent::report($exception);
+    }
+
+    /**
+     * Custom Inertia Error Handler
+     * By https://www.nicolaskempf.fr/en/the-error-pages-with-laravel/
+     */
+    public function render($request, \Throwable $e)
+    {
+        $response = parent::render($request, $e);
+        if (
+            !app()->environment(['local', 'dev', 'testing']) &&
+            in_array($response->status(), [500, 503, 404, 403])
+        ) {
+            return Inertia::render('Error', ['status' => $response->status()])
+                ->toResponse($request)
+                ->setStatusCode($response->status());
+        } else if ($response->status() === 419) {
+            return back()->with([
+                'message' => __('The page expired, please try again.'),
+            ]);
+        }
+
+        return $response;
     }
 }

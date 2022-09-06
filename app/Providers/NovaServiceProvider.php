@@ -51,7 +51,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             Boolean::make('Enable background for featured image', 'featured_image_background'),
             Textarea::make('Slideshow Images', 'slideshow_images')
                 ->help('Enter multiple URLs seperated by a comma.'),
-            TinymceEditor::make('Featured Column', 'featured_column_'),
+            //TinymceEditor::make('Featured Column', 'featured_column'),
             TinymceEditor::make('Main Content', 'main_content'),
         ], [], 'Homepage');
 
