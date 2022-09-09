@@ -37,7 +37,7 @@ const logout = () => {
         <JetBanner />
 
         <div class="min-h-screen">
-            <nav class="z-50 bg-white w-full" :class="{ 'relative': !fullHeight, 'absolute md:fixed': fullHeight }">
+            <nav class="z-50 bg-white w-full" :class="{ 'relative': !fullHeight, 'absolute': fullHeight, 'md:fixed': fullHeight && !showingNavigationDropdown }">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
                     <div class="flex justify-between h-20">
