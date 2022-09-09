@@ -93,7 +93,7 @@ const logout = () => {
                 <!-- Responsive Navigation Menu -->
                 <div
                     :class="{ 'block': showingNavigationDropdown, 'hidden': !showingNavigationDropdown }"
-                    class="relative h-screen"
+                    class="relative h-full"
                 >
                     <slot name="responsive-links" />
                 </div>
