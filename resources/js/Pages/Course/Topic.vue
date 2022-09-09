@@ -130,7 +130,6 @@ import { Link } from '@inertiajs/inertia-vue3'
                     if (response.data.next != null) {
                         this.next_url = route('courses.topic', [response.data.next?.topic_id ?? this.topic.id, response.data.next.id]);
                     }
-                    //this.comments = response.data
                 })
             },
         }
