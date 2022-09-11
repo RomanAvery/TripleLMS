@@ -40,6 +40,11 @@ class QualtricsSurveyLink extends Resource
     public static function label() { return 'Personal Survey Links'; }
     public static function singularLabel() { return 'Personal Survey Link'; }
 
+    public static function canImportResource(Request $request)
+    {
+        return $user->hasRole([Roles::ADMIN, Roles::SUPER_ADMIN]);
+    }
+
     /**
      * Get the fields displayed by the resource.
      *

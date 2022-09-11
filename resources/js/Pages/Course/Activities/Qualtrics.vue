@@ -26,7 +26,7 @@
             </div>
                 
             <div v-else class="mx-4">
-                <p>You haven't opted in to these surveys.</p>
+                <p>You haven't opted in to any surveys.</p>
                 <p>If you'd like to, please ask your teacher.</p>
                 <p>Otherwise, you can continue.</p>
             </div>

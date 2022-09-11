@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "caf6a2d825672071fa24f343dc88c89c",
+    "content-hash": "7300e1259efad1d893500f432e38ea85",
     "packages": [
         {
             "name": "alexwenzel/nova-dependency-container",
@@ -119,42 +119,6 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.1.1"
             },
             "time": "2022-01-18T09:12:03+00:00"
-        },
-        {
-            "name": "avery/image-list",
-            "version": "dev-dev",
-            "dist": {
-                "type": "path",
-                "url": "./nova-components/ImageList",
-                "reference": "18787e2abe0a4fe9aba8506ea783a0a3f862ceac"
-            },
-            "require": {
-                "php": "^7.3|^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Avery\\ImageList\\FieldServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Avery\\ImageList\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "A Laravel Nova field.",
-            "keywords": [
-                "laravel",
-                "nova"
-            ],
-            "transport-options": {
-                "relative": true
-            }
         },
         {
             "name": "aws/aws-crt-php",
@@ -602,52 +566,6 @@
                 "source": "https://github.com/chelout/laravel-relationship-events/tree/v1.5.0"
             },
             "time": "2022-02-11T17:35:13+00:00"
-        },
-        {
-            "name": "chris-ware/nova-breadcrumbs",
-            "version": "2.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/chris-ware/nova-breadcrumbs.git",
-                "reference": "140769704cf1dd89ea2a12ef07609c9bb321eb52"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/chris-ware/nova-breadcrumbs/zipball/140769704cf1dd89ea2a12ef07609c9bb321eb52",
-                "reference": "140769704cf1dd89ea2a12ef07609c9bb321eb52",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/nova": ">=3",
-                "php": ">=7.1.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "ChrisWare\\NovaBreadcrumbs\\ToolServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "ChrisWare\\NovaBreadcrumbs\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A Laravel Nova tool.",
-            "keywords": [
-                "laravel",
-                "nova"
-            ],
-            "support": {
-                "issues": "https://github.com/chris-ware/nova-breadcrumbs/issues",
-                "source": "https://github.com/chris-ware/nova-breadcrumbs/tree/2.3.1"
-            },
-            "time": "2021-07-19T17:38:52+00:00"
         },
         {
             "name": "clue/stream-filter",
