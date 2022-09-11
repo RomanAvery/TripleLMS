@@ -76,9 +76,11 @@ class Activity extends Model implements Sortable
             case 'App\Models\TypesActivities\Qualtrics':
                 $qualtric = Qualtrics::create([
                     'link' => $model->link,
+                    'allow_generic_link' => $model->allow_generic_link,
                 ]);
                 $model->activityable_type = Qualtrics::class;
                 $model->activityable_id = $qualtric->id;
+                unset($model->allow_generic_link);
                 unset($model->link);
                 break;
 
