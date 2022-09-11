@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('qualtrics', function (Blueprint $table) {
-            $table->boolean('allow_generic_link')->default(false)->nullable();
+            $table->boolean('allow_generic_link')->default(false);
         });
     }
 

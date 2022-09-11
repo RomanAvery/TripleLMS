@@ -43,6 +43,7 @@ class CourseSeeder extends Seeder
                         'name' => 'Pre-Course Survey',
                         'content' => Qualtrics::make([
                             'link' => 'https://vuw.qualtrics.com/jfe/form/SV_8BUUZv8jyD8papo',
+                            'allow_generic_link' => false,
                         ]),
                     ],
                     [
@@ -169,6 +170,13 @@ class CourseSeeder extends Seeder
                         'name' => 'My Personal Project',
                         'content' => H5P::make([
                             'link' => 'https://vuwcourses.h5p.com/content/1291702303280850009',
+                        ]),
+                    ],
+                    [
+                        'name' => 'Post-Course Survey',
+                        'content' => Qualtrics::make([
+                            'link' => 'https://google.com',
+                            'allow_generic_link' => false,
                         ]),
                     ],
                 ]
