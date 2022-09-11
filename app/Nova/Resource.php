@@ -60,10 +60,10 @@ abstract class Resource extends NovaResource
         return parent::relatableQuery($request, $query);
     }
 
-    public function resolveCards(NovaRequest $request)
+    /*public function resolveCards(NovaRequest $request)
     {
         $cards = $this->cards($request);
         array_unshift($cards, Breadcrumbs::make($request, $this));
         return collect(array_values($this->filter($cards)));
-    }
+    }*/
 }

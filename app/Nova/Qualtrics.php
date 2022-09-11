@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Qualtrics extends Resource
@@ -71,6 +72,9 @@ class Qualtrics extends Resource
             Text::make('Link')
                 ->required()
                 ->rules('required'),
+
+            Boolean::make('Allow Generic Links', 'allow_generic_link')
+                ->default(false),
         ];
     }
 

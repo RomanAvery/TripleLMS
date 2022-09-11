@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TypesActivities\Qualtrics;
+use App\Models\QualtricsSurveyLink;
+
 use App\Models\Activity;
 use App\Models\Course;
 use App\Models\Topic;
@@ -88,8 +91,22 @@ class CourseController extends Controller
         $topic->course;
         $topics = $topic->course->topics;
 
+        $qualtricsLink = null;
+
+        if ($activity->activityable instanceof Qualtrics) {
+            // Try to find personal link
+            $link = QualtricsSurveyLink::where('activity_id', $activity->id)
+                ->where('email', $user->email)
+                ->get()
+                ->first();
+                
+            if ($link !== null) {
+                $qualtricsLink = $link->link;
+            }
+        }
+
         return Inertia::render('Course/Topic')
-            ->with(compact('topic', 'activity', 'topics'));
+            ->with(compact('topic', 'activity', 'topics', 'qualtricsLink'));
     }
 
     public function finish($id)

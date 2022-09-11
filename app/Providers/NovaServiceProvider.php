@@ -20,6 +20,8 @@ use Lms\CourseGradebook\CourseGradebook;
 use Lms\Gradebook\Gradebook;
 use Lms\StudentGradebook\StudentGradebook;
 
+use SimonHamp\LaravelNovaCsvImport\LaravelNovaCsvImport;
+
 use Illuminate\Support\Facades\Blade;
 
 use Eminiarts\Tabs\Tab;
@@ -127,17 +129,18 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
 
-            \Spatie\BackupTool\BackupTool::make()
+            /*\Spatie\BackupTool\BackupTool::make()
                 ->canSee(function (){
                     return auth()->user()->can('manage backup');
-                }),
+                }),*/
 
             Novaspatiepermissions::make()
                 ->canSee(function (){
                     return auth()->user()->can('manage roles');
                 }),
 
-            //\ChrisWare\NovaBreadcrumbs\NovaBreadcrumbs::make(),
+            //new LaravelNovaCsvImport,
+
             new \Outl1ne\NovaSettings\NovaSettings,
         ];
     }
