@@ -178,6 +178,11 @@ class Activity extends Model implements Sortable
         return 0;
     }
 
+    public function getFullNameAttribute()
+    {
+        return "{$this->course->name} - {$this->name}";
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class)
@@ -188,6 +193,10 @@ class Activity extends Model implements Sortable
     public function getCourseAttribute()
     {
         return $this->topic->course;
+    }
+
+    public function qualtrics_links() {
+        return $this->hasMany(QualtricsSurveyLink::class);
     }
 
     public function getIsActiveToDoAttribute()

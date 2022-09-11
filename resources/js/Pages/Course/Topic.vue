@@ -26,7 +26,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
                     <h5p-activity v-if="activity.type == 'H5P'" :activity="activity" :user="user" />
 
-                    <qualtrics-activity v-if="activity.type == 'QUALTRICS'" :activity="activity" :user="user" />
+                    <qualtrics-activity v-if="activity.type == 'QUALTRICS'" :activity="activity" :user="user" :qualtricsLink="qualtricsLink" />
 
                     <make-code-activity v-if="activity.type == 'MAKECODE'" :activity="activity" :user="user" />
 
@@ -76,6 +76,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             topics: Object,
             activity: Object,
             user: Object,
+            qualtricsLink: String,
         },
 
         track() {
@@ -103,8 +104,6 @@ import { Link } from '@inertiajs/inertia-vue3'
 
         mounted() {
             this.getNav();
-            console.log(this.topic);
-            console.log(this.activity);
         },
 
         methods: {

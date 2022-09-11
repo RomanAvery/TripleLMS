@@ -10,7 +10,19 @@
 
         <div class="my-4">
             <div v-if="user.survey_opt_in" id="qualtrics-content">
-                <iframe :src="`${this.activity.activityable.link}?name=${this.user.name}&email=${this.user.email}`"></iframe>
+                <iframe
+                    v-if="qualtricsLink !== null"
+                    :src="qualtricsLink"
+                ></iframe>
+                <iframe 
+                    v-else-if="this.activity.activityable.allow_generic_link"
+                    :src="`${this.activity.activityable.link}?name=${this.user.name}&email=${this.user.email}`"
+                ></iframe>
+                <div v-else class="mx-4">
+                    <p>This survey is opt-in only.</p>
+                    <p>If you'd like to join, please ask your teacher.</p>
+                    <p>Otherwise, you can continue.</p>
+                </div>
             </div>
                 
             <div v-else class="mx-4">
@@ -37,6 +49,7 @@
         props: {
             activity: Object,
             user: Object,
+            qualtricsLink: String,
         },
 
         mounted() {

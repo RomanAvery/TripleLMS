@@ -11,7 +11,14 @@ class Qualtrics extends Model
 
     protected $table = 'qualtrics';
 
-    protected $fillable = ['link'];
+    protected $fillable = [
+        'link',
+        'allow_generic_link'
+    ];
+
+    protected $casts = [
+        'allow_generic_link' => 'boolean'
+    ];
 
     const COMPONENT = 'QUALTRICS';
 }
