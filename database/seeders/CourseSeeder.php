@@ -40,12 +40,6 @@ class CourseSeeder extends Seeder
                 'name' => 'Lesson 1: Course details',
                 'activities' => [
                     [
-                        'name' => 'Pre-Course Survey',
-                        'content' => Qualtrics::make([
-                            'link' => 'https://vuw.qualtrics.com/jfe/form/SV_8BUUZv8jyD8papo',
-                        ]),
-                    ],
-                    [
                         'name' => 'Course Overview',
                         'content' => H5P::make([
                             'link' => 'https://vuwcourses.h5p.com/content/1291628815245990239',

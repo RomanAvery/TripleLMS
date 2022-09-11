@@ -74,7 +74,8 @@ class Qualtrics extends Resource
                 ->rules('required'),
 
             Boolean::make('Allow Generic Links', 'allow_generic_link')
-                ->default(false),
+                ->default(false)
+                ->rules('required'),
         ];
     }
 
