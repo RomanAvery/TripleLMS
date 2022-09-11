@@ -16,9 +16,5 @@ class Qualtrics extends Model
         'allow_generic_link'
     ];
 
-    protected $casts = [
-        'allow_generic_link' => 'boolean'
-    ];
-
     const COMPONENT = 'QUALTRICS';
 }
