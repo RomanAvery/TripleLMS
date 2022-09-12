@@ -7,6 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class QualtricsSurveyLink extends Model
 {
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            // Make sure email is lowercase
+            $model->email = strtolower($model->email);
+        });
+    }
+
     protected $fillable = [
         'email',
         'link',
