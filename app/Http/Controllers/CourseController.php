@@ -96,7 +96,7 @@ class CourseController extends Controller
         if ($activity->activityable instanceof Qualtrics) {
             // Try to find personal link
             $link = QualtricsSurveyLink::where('activity_id', $activity->id)
-                ->whereRaw('LOWER(`email`) LIKE ?', [strtolower($user->email)])
+                ->where('email', strtolower($user->email))
                 ->get()
                 ->first();
                 
