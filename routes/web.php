@@ -98,6 +98,7 @@ Route::middleware([
     })->name('notifications.delete');
 });
 
+// Catch any except for admin
 Route::any('/{any}', function () {
     abort(404);
-})->where('any', '.*');
+})->where('any', '^(?!admin).*$');
